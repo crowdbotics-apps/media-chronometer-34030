@@ -947,7 +947,7 @@
     "@types/yargs" "^15.0.0"
     chalk "^4.0.0"
 
-"@modules/app-menu@file:./modules/app-menu/":
+"@modules/app-menu@file:./modules/app-menu":
   version "1.0.0"
 
 "@modules/login@file:./modules/login":
@@ -958,6 +958,9 @@
     react-native-keyboard-aware-scroll-view "^0.9.3"
 
 "@modules/splash@file:./modules/splash":
+  version "1.0.0"
+
+"@modules/splash@file:./modules/splash/":
   version "1.0.0"
 
 "@react-native-community/cli-debugger-ui@^5.0.1":
