@@ -145,7 +145,6 @@
 				A96FDB7E0B6DD1E29388696C /* Pods-monique_app_34030-monique_app_34030Tests.debug.xcconfig */,
 				FC17DB3A7D46864973B03916 /* Pods-monique_app_34030-monique_app_34030Tests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
