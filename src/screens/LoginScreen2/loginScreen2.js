@@ -38,7 +38,9 @@ const LoginScreen2 = ({ route }) => {
   const [isLoading, setIsLoading] = useState(false)
   const { onChange } = useContext(UserContext)
 
-  signinButtonPressed = () => {
+  const onLogin = () => {
+    navigationService.replace(screenConstants.SettingsScreen)
+    return
     const payload = {
       email,
       password
@@ -144,7 +146,7 @@ const LoginScreen2 = ({ route }) => {
             editable={false}
           />
         </View>
-        <CustomButton title="Login to new Study" />
+        <CustomButton onPress={onLogin} title="Login to new Study" />
       </View>
     </ImageBackground>
     // <View style={styles.container}>

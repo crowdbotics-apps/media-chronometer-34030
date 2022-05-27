@@ -7,6 +7,7 @@ import LoginScreen from "../screens/LoginScreen/loginScreen"
 
 import { UserContext } from "../store/UserContext"
 import LoginScreen2 from "../screens/LoginScreen2/loginScreen2"
+import SettingsScreen from "../screens/SettingsScreen/SettingsScreen"
 
 enableScreens()
 const Stack = createStackNavigator()
@@ -42,42 +43,17 @@ const AppStack = () => {
           }}
           component={LoginScreen2}
         />
+
+        {/* Auth */}
         <Stack.Screen
-          name={screenConstants.HomePageScreen}
+          name={screenConstants.SettingsScreen}
           options={{
-            headerShown: false
+            title: "Settings"
           }}
-          component={HomePageBottom}
+          component={SettingsScreen}
         />
       </Stack.Navigator>
     </UserContext.Provider>
-  )
-}
-
-/**************************************************/
-/************ Home Page Bottom Tab ************/
-/**************************************************/
-
-const HomePageBottom = () => {
-  return (
-    <UserContext.Consumer>
-      <Stack.Navigator
-        initialRouteName={screenConstants.SignUpScreen}
-        screenOptions={{
-          cardStyle: {
-            backgroundColor: "#FFFFFF"
-          }
-        }}
-      >
-        <Stack.Screen
-          name={screenConstants.SignInScreen}
-          options={{
-            headerShown: false
-          }}
-          component={LoginScreen}
-        />
-      </Stack.Navigator>
-    </UserContext.Consumer>
   )
 }
 
