@@ -36,7 +36,7 @@ class LoginViewSet(viewsets.ViewSet):
 
         user = StudyId.objects.filter(study_id=request.data['study_id'])
         if user:
-            
+             
             return JsonResponse({'msg':'Study Id exist'})
         else:
             return JsonResponse({'error':'Study Id Does Not exist!'})
