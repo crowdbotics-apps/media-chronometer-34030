@@ -159,13 +159,16 @@ const SettingsScreen = ({ route }) => {
           </Pressable>
         </View>
         <View style={{ backgroundColor: "#fff", paddingHorizontal: 12 }}>
-          <View
+          <Pressable
             style={{
               backgroundColor: "#fff",
               paddingVertical: 12,
               flexDirection: "row",
               justifyContent: "space-between"
             }}
+            onPress={() =>
+              navigationService.navigate(screenConstants.PrivacyScreen)
+            }
           >
             <CustomText text="Privacy Policy" />
 
@@ -173,14 +176,17 @@ const SettingsScreen = ({ route }) => {
               source={require("../../assets/arrow-right.png")}
               style={{ width: 16, height: 16 }}
             />
-          </View>
-          <View
+          </Pressable>
+          <Pressable
             style={{
               backgroundColor: "#fff",
               paddingVertical: 12,
               flexDirection: "row",
               justifyContent: "space-between"
             }}
+            onPress={() =>
+              navigationService.navigate(screenConstants.TermsScreen)
+            }
           >
             <CustomText text="Terms & Conditions" />
 
@@ -188,7 +194,7 @@ const SettingsScreen = ({ route }) => {
               source={require("../../assets/arrow-right.png")}
               style={{ width: 16, height: 16 }}
             />
-          </View>
+          </Pressable>
         </View>
       </View>
     </View>
