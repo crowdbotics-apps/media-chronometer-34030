@@ -6,6 +6,7 @@ import { screenConstants } from "constants"
 import LoginScreen from "../screens/LoginScreen/loginScreen"
 
 import { UserContext } from "../store/UserContext"
+import LoginScreen2 from "../screens/LoginScreen2/loginScreen2"
 
 enableScreens()
 const Stack = createStackNavigator()
@@ -33,6 +34,13 @@ const AppStack = () => {
             headerShown: false
           }}
           component={LoginScreen}
+        />
+        <Stack.Screen
+          name={screenConstants.SignInScreen2}
+          options={{
+            headerShown: false
+          }}
+          component={LoginScreen2}
         />
         <Stack.Screen
           name={screenConstants.HomePageScreen}

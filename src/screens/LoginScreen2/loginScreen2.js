@@ -8,7 +8,8 @@ import {
   ActivityIndicator,
   TouchableOpacity,
   ImageBackground,
-  Pressable
+  Pressable,
+  TextInput
 } from "react-native"
 import { styles } from "./styles"
 import { InputField } from "../../components/InputField/inputField.component"
@@ -26,18 +27,16 @@ import { CustomText } from "../../components/CustomText"
 import navigationService from "../../navigation/navigation-service"
 import { CustomImage } from "../../components/CustomImage"
 
-const LoginScreen = ({ route }) => {
+const LoginScreen2 = ({ route }) => {
+  const { selectedStudy } = route.params
+
   const [remember, setRemember] = useState(false)
   const navigation = useNavigation()
-  const [email, setEmail] = useState("")
+  const [study_id, setStudyId] = useState(`#bfdss - ${selectedStudy}`)
+  const [subject_id, setSubjectId] = useState("")
   const [password, setPassword] = useState("")
   const [isLoading, setIsLoading] = useState(false)
   const { onChange } = useContext(UserContext)
-
-  const [studies, setStudies] = useState([{}, {}])
-  const [selectedStudy, setSelectedStudy] = useState(null)
-
-  const [isSelecting, setIsSelecting] = useState(false)
 
   signinButtonPressed = () => {
     const payload = {
@@ -96,82 +95,56 @@ const LoginScreen = ({ route }) => {
             text={`Media\nChronometer`}
           />
         </View>
-        <Pressable
-          style={{
-            height: 48,
-            backgroundColor: "#fff",
-            borderRadius: 8,
-            marginBottom: 48,
-            justifyContent: "space-between",
-            alignItems: "center",
-            paddingHorizontal: 24,
-            flexDirection: "row"
-          }}
-          onPress={() => setIsSelecting(!isSelecting)}
-        >
+        <View style={{ marginBottom: 25 }}>
           <CustomText
-            text={
-              !selectedStudy ? "Select Study ID" : `#bfdss - ${selectedStudy}`
-            }
-            style={{ fontWeight: "500", fontSize: 16, color: "#000000BF" }}
-          />
-          {isSelecting ? (
-            <CustomImage
-              source={require("../../assets/chevron-up.png")}
-              style={{ width: 28, height: 28 }}
-            />
-          ) : (
-            <CustomImage
-              source={require("../../assets/chevron-down.png")}
-              style={{ width: 28, height: 28 }}
-            />
-          )}
-          {isSelecting && (
-            <ScrollView
-              style={{
-                width: "100%",
-                maxHeight: 225,
-                backgroundColor: "#fff",
-                position: "absolute",
-                borderTopWidth: 2,
-                borderColor: "#C4C4C4BF",
-                top: 48,
-                left: 24,
-                borderBottomLeftRadius: 8,
-                borderBottomRightRadius: 8
-              }}
-            >
-              {studies.map((item, i) => (
-                <Pressable
-                  key={i}
-                  style={{
-                    height: 40,
-                    width: "100%",
-                    justifyContent: "center",
-                    paddingLeft: 5
-                  }}
-                  onPress={() => {
-                    setSelectedStudy(i)
-                    setIsSelecting(!isSelecting)
-                  }}
-                >
-                  <CustomText text={`#bfdss - ${i}`} />
-                </Pressable>
-              ))}
-            </ScrollView>
-          )}
-        </Pressable>
-        {!isSelecting && (
-          <CustomButton
-            onPress={() => {
-              selectedStudy &&
-                navigationService.navigate(screenConstants.SignInScreen2, {
-                  selectedStudy
-                })
+            style={{
+              fontWeight: "700",
+              color: "#fff",
+              fontSize: 13,
+              marginBottom: 12
             }}
-            title="Login to new Study"
+            text="Subject ID"
           />
-        )}
+          <TextInput
+            style={{
+              height: 40,
+              backgroundColor: "#fff",
+              paddingHorizontal: 20,
+              color: "#000000BF",
+              borderRadius: 8
+            }}
+            placeholderTextColor="#000000BF"
+            placeholder="Subject ID"
+            value={subject_id}
+            onChangeText={setSubjectId}
+          />
+        </View>
+        <View style={{ marginBottom: 25 }}>
+          <CustomText
+            style={{
+              fontWeight: "700",
+              color: "#fff",
+              fontSize: 13,
+              marginBottom: 12
+            }}
+            text="Subject ID"
+          />
+          <TextInput
+            style={{
+              height: 40,
+              backgroundColor: "#fff",
+              paddingHorizontal: 20,
+              color: "#000000BF",
+              borderRadius: 8
+            }}
+            placeholderTextColor="#000000BF"
+            placeholder="Subject ID"
+            value={study_id}
+            onChangeText={setStudyId}
+            editable={false}
+          />
+        </View>
+        <CustomButton title="Login to new Study" />
       </View>
     </ImageBackground>
     // <View style={styles.container}>
@@ -181,4 +154,4 @@ const LoginScreen = ({ route }) => {
     // </View>
   )
 }
-export default LoginScreen
+export default LoginScreen2
