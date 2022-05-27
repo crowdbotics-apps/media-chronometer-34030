@@ -24,3 +24,12 @@ class User(AbstractUser):
 
     def get_absolute_url(self):
         return reverse("users:detail", kwargs={"username": self.username})
+
+#For StudyID
+class StudyId(models.Model):
+    study_id = models.CharField(
+        _("Study ID"), blank=True, null=True, max_length=255)
+
+    def __str__(self):
+        return self.study_id
+
