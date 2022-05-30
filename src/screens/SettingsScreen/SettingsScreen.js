@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import {
   ScrollView,
   View,
@@ -8,7 +8,9 @@ import {
   ActivityIndicator,
   TouchableOpacity,
   ImageBackground,
-  Pressable
+  Pressable,
+  NativeModules,
+  Platform
 } from "react-native"
 import { styles } from "./styles"
 import { InputField } from "../../components/InputField/inputField.component"
@@ -39,45 +41,9 @@ const SettingsScreen = ({ route }) => {
 
   const [isSelecting, setIsSelecting] = useState(false)
 
-  signinButtonPressed = () => {
-    const payload = {
-      email,
-      password
-    }
-
-    const onSuccess = async ({ data }) => {
-      setIsLoading(false)
-      console.log(data)
-      // Set JSON Web Token on success
-      setClientToken(data.token)
-      var profile = data.user
-      if (remember) {
-        Persistence.setUserProfileData(profile)
-        Persistence.setAccessToken(data.token)
-      }
-
-      onChange(profile)
-      navigation.reset({
-        index: 0,
-        routes: [{ name: screenConstants.HomePageScreen }]
-      })
-    }
-
-    const onFailure = error => {
-      setIsLoading(false)
-      console.log(error.response.data)
-      error = error.response.data
-      error = error[Object.keys(error)[0]]
-      Alert.alert("Login", error[0])
-      if (error[0] == "Email address not verified")
-        navigationService.navigate(screenConstants.TokenScreen, { email })
-    }
-
-    // Show spinner when call is made
-    setIsLoading(true)
-
-    APIKit.post("/api/v1/login/", payload).then(onSuccess).catch(onFailure)
-  }
+  useEffect(() => {
+    if (Platform.OS == "android") NativeModules.UsageStat.init()
+  }, [])
 
   return (
     <View style={{ flex: 1, backgroundColor: "#E5E5E5" }}>
