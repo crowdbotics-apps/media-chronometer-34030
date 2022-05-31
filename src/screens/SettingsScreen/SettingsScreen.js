@@ -42,9 +42,12 @@ const SettingsScreen = ({ route }) => {
   const [isSelecting, setIsSelecting] = useState(false)
 
   useEffect(() => {
-    if (Platform.OS == "android") NativeModules.UsageStat.init()
+    if (Platform.OS == "android") {
+      NativeModules.UsageStat.init()
+    }
   }, [])
-
+  // https://github.com/ciitamjadibraheem/UsageStats/blob/master/app/src/main/java/at/ciit/usagestats/MainActivity.java
+  // https://ciit.at/android-usagestatsmanager/
   return (
     <View style={{ flex: 1, backgroundColor: "#E5E5E5" }}>
       <View>

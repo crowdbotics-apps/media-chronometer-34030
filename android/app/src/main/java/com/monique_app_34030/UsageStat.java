@@ -44,19 +44,20 @@ public class UsageStat extends ReactContextBaseJavaModule {
         return "UsageStat";
     }
 
-    @ReactMethod
     public void createCalendarEvent(String name, String location) {
         Log.d("CalendarModule", "Create event called with name: " + name
                 + " and location: " + location);
     }
 
-    @ReactMethod
+    @ReactMethod(isBlockingSynchronousMethod = true)
     private void init() {
         Context context = getReactApplicationContext();
         if (getGrantStatus()) {
             showHideWithPermission();
 
             Toast.makeText(context, "there is permission", Toast.LENGTH_LONG).show();
+
+            loadStatistics();
         } else {
             showHideNoPermission();
             context.startActivity(new Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS));
@@ -97,4 +98,31 @@ public class UsageStat extends ReactContextBaseJavaModule {
         // usageTv.setVisibility(View.GONE);
         // appsList.setVisibility(View.GONE);
     }
+
+    /**
+     * load the usage stats for last 24h
+     */
+
+    public void loadStatistics() {
+        Context context = getReactApplicationContext();
+        UsageStatsManager usm = (UsageStatsManager) context.getSystemService(context.USAGE_STATS_SERVICE);
+        List<UsageStats> appList = usm.queryUsageStats(UsageStatsManager.INTERVAL_DAILY,
+                System.currentTimeMillis() - 1000 * 3600 * 24, System.currentTimeMillis());
+        appList = appList.stream().filter(app -> app.getTotalTimeInForeground() > 0).collect(Collectors.toList());
+
+        // Group the usageStats by application and sort them by total time in foreground
+        if (appList.size() > 0) {
+            Map<String, UsageStats> mySortedMap = new TreeMap<>();
+            for (UsageStats usageStats : appList) {
+                mySortedMap.put(usageStats.getPackageName(), usageStats);
+                Log.d("Stat",
+                        "| first: " + String.valueOf(usageStats.getFirstTimeStamp()) + "| last timestamp: "
+                                + String.valueOf(usageStats.getLastTimeStamp()) + "| last time: "
+                                + String.valueOf(usageStats.getLastTimeUsed()) + "| name: "
+                                + usageStats.getPackageName());
+            }
+            // showAppsUsage(mySortedMap);
+        }
+    }
+
 }
