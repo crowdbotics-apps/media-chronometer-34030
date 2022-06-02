@@ -43,3 +43,16 @@ class LoginViewSet(viewsets.ViewSet):
 
 
         #return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+
+
+class StudyViewSet(ModelViewSet):
+    serializer_class = StudySerializer
+    http_method_names = ["get",]
+    queryset = StudyId.objects.all()
+
+    def get(self, request, format=None):
+        users = StudyId.objects.all()
+        serializer = StudySerializer(users, many=True)
+        return Response(serializer.data)        
