@@ -39,29 +39,17 @@ const LoginScreen2 = ({ route }) => {
   const { onChange } = useContext(UserContext)
 
   const onLogin = () => {
-    navigationService.replace(screenConstants.SettingsScreen)
-    return
     const payload = {
-      email,
-      password
+      study_id
     }
 
     const onSuccess = async ({ data }) => {
       setIsLoading(false)
-      console.log(data)
-      // Set JSON Web Token on success
-      setClientToken(data.token)
-      var profile = data.user
-      if (remember) {
-        Persistence.setUserProfileData(profile)
-        Persistence.setAccessToken(data.token)
-      }
+      var profile = { subject_id, study_id }
+      Persistence.setUserProfileData(profile)
 
       onChange(profile)
-      navigation.reset({
-        index: 0,
-        routes: [{ name: screenConstants.HomePageScreen }]
-      })
+      navigationService.replace(screenConstants.SettingsScreen)
     }
 
     const onFailure = error => {
@@ -70,8 +58,6 @@ const LoginScreen2 = ({ route }) => {
       error = error.response.data
       error = error[Object.keys(error)[0]]
       Alert.alert("Login", error[0])
-      if (error[0] == "Email address not verified")
-        navigationService.navigate(screenConstants.TokenScreen, { email })
     }
 
     // Show spinner when call is made

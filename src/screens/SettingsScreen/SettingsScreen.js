@@ -34,10 +34,10 @@ const SettingsScreen = ({ route }) => {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [isLoading, setIsLoading] = useState(false)
-  const { onChange } = useContext(UserContext)
+  const { onChange, user } = useContext(UserContext)
 
-  const [studies, setStudies] = useState([{}, {}])
-  const [selectedStudy, setSelectedStudy] = useState(null)
+  const [studies, setStudies] = useState([])
+  const [selectedStudy, setSelectedStudy] = useState(user)
 
   const [isSelecting, setIsSelecting] = useState(false)
 
@@ -46,6 +46,32 @@ const SettingsScreen = ({ route }) => {
       NativeModules.UsageStat.init()
     }
   }, [])
+
+  useEffect(async () => {
+    getSudyIds()
+  }, [])
+
+  getSudyIds = () => {
+    const onSuccess = async ({ data }) => {
+      setIsLoading(false)
+      console.log(data)
+      setStudies(data)
+    }
+
+    const onFailure = error => {
+      setIsLoading(false)
+      console.log(error.response.data)
+      error = error.response.data
+      error = error[Object.keys(error)[0]]
+      Alert.alert("Error", error[0])
+    }
+
+    // Show spinner when call is made
+    setIsLoading(true)
+
+    APIKit.get("/api/v1/studyid/").then(onSuccess).catch(onFailure)
+  }
+
   // https://github.com/ciitamjadibraheem/UsageStats/blob/master/app/src/main/java/at/ciit/usagestats/MainActivity.java
   // https://ciit.at/android-usagestatsmanager/
   return (
@@ -76,7 +102,7 @@ const SettingsScreen = ({ route }) => {
           >
             <CustomText
               text={
-                !selectedStudy ? "Select Study ID" : `#bfdss - ${selectedStudy}`
+                !selectedStudy ? "Select Study ID" : selectedStudy.study_id
               }
               style={{ fontWeight: "500", fontSize: 16, color: "#000000BF" }}
             />
@@ -116,11 +142,11 @@ const SettingsScreen = ({ route }) => {
                       paddingLeft: 5
                     }}
                     onPress={() => {
-                      setSelectedStudy(i)
+                      setSelectedStudy(item)
                       setIsSelecting(!isSelecting)
                     }}
                   >
-                    <CustomText text={`#bfdss - ${i}`} />
+                    <CustomText text={item.study_id} />
                   </Pressable>
                 ))}
               </ScrollView>
