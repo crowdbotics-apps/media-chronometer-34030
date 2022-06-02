@@ -32,7 +32,7 @@ const LoginScreen2 = ({ route }) => {
 
   const [remember, setRemember] = useState(false)
   const navigation = useNavigation()
-  const [study_id, setStudyId] = useState(`#bfdss - ${selectedStudy}`)
+  const [study_id, setStudyId] = useState(selectedStudy.study_id)
   const [subject_id, setSubjectId] = useState("")
   const [password, setPassword] = useState("")
   const [isLoading, setIsLoading] = useState(false)
@@ -129,7 +129,7 @@ const LoginScreen2 = ({ route }) => {
               fontSize: 13,
               marginBottom: 12
             }}
-            text="Subject ID"
+            text="Study ID"
           />
           <TextInput
             style={{
@@ -140,7 +140,7 @@ const LoginScreen2 = ({ route }) => {
               borderRadius: 8
             }}
             placeholderTextColor="#000000BF"
-            placeholder="Subject ID"
+            placeholder="Study ID"
             value={study_id}
             onChangeText={setStudyId}
             editable={false}

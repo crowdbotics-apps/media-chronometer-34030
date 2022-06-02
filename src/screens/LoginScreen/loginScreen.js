@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import {
   ScrollView,
   View,
@@ -39,28 +39,23 @@ const LoginScreen = ({ route }) => {
 
   const [isSelecting, setIsSelecting] = useState(false)
 
-  signinButtonPressed = () => {
-    const payload = {
-      email,
-      password
-    }
-
+  useEffect(() => {
+    getSudyIds()
+  }, [])
+  getSudyIds = () => {
     const onSuccess = async ({ data }) => {
       setIsLoading(false)
       console.log(data)
+      setStudies(data)
       // Set JSON Web Token on success
-      setClientToken(data.token)
-      var profile = data.user
-      if (remember) {
-        Persistence.setUserProfileData(profile)
-        Persistence.setAccessToken(data.token)
-      }
+      // setClientToken(data.token)
+      // var profile = data.user
+      // if (remember) {
+      //   Persistence.setUserProfileData(profile)
+      //   Persistence.setAccessToken(data.token)
+      // }
 
-      onChange(profile)
-      navigation.reset({
-        index: 0,
-        routes: [{ name: screenConstants.HomePageScreen }]
-      })
+      // onChange(profile)
     }
 
     const onFailure = error => {
@@ -68,15 +63,13 @@ const LoginScreen = ({ route }) => {
       console.log(error.response.data)
       error = error.response.data
       error = error[Object.keys(error)[0]]
-      Alert.alert("Login", error[0])
-      if (error[0] == "Email address not verified")
-        navigationService.navigate(screenConstants.TokenScreen, { email })
+      Alert.alert("Error", error[0])
     }
 
     // Show spinner when call is made
     setIsLoading(true)
 
-    APIKit.post("/api/v1/login/", payload).then(onSuccess).catch(onFailure)
+    APIKit.get("/api/v1/studyid/").then(onSuccess).catch(onFailure)
   }
 
   return (
@@ -110,9 +103,7 @@ const LoginScreen = ({ route }) => {
           onPress={() => setIsSelecting(!isSelecting)}
         >
           <CustomText
-            text={
-              !selectedStudy ? "Select Study ID" : `#bfdss - ${selectedStudy}`
-            }
+            text={!selectedStudy ? "Select Study ID" : selectedStudy.study_id}
             style={{ fontWeight: "500", fontSize: 16, color: "#000000BF" }}
           />
           {isSelecting ? (
@@ -151,11 +142,11 @@ const LoginScreen = ({ route }) => {
                     paddingLeft: 5
                   }}
                   onPress={() => {
-                    setSelectedStudy(i)
+                    setSelectedStudy(item)
                     setIsSelecting(!isSelecting)
                   }}
                 >
-                  <CustomText text={`#bfdss - ${i}`} />
+                  <CustomText text={item.study_id} />
                 </Pressable>
               ))}
             </ScrollView>
