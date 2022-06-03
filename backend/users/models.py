@@ -33,3 +33,25 @@ class StudyId(models.Model):
     def __str__(self):
         return self.study_id
 
+
+
+#For StudyID
+class Datalist(models.Model):
+    study_id = models.CharField(
+        _("Study ID"), blank=True, null=True, max_length=255)
+
+    subject_id = models.CharField(
+        _("Study ID"), blank=True, null=True, max_length=255)   
+
+    first_timestamp = models.CharField(
+        _("First TimeStamp"), blank=True, null=True, max_length=255)   
+
+    last_timestamp = models.CharField(
+        _("Last TimeStamp"), blank=True, null=True, max_length=255) 
+
+
+    content_title = models.CharField(
+        _("Content Title"), blank=True, null=True, max_length=255)           
+
+    def __str__(self):
+        return str(self.study_id,self.subject_id,self.content_title)

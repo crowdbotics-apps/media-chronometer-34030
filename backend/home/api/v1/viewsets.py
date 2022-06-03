@@ -8,7 +8,8 @@ from django.http import HttpResponse, JsonResponse
 from home.api.v1.serializers import (
     SignupSerializer,
     UserSerializer,
-    StudySerializer
+    StudySerializer,
+    Datalistserializer
 )
 
 from users.models import StudyId
@@ -56,3 +57,25 @@ class StudyViewSet(ModelViewSet):
         users = StudyId.objects.all()
         serializer = StudySerializer(users, many=True)
         return Response(serializer.data)        
+
+
+
+#Added for DataList
+
+
+class DataListView(ModelViewSet):
+    """
+    List all snippets, or create a new snippet.
+    """
+    serializer_class = Datalistserializer
+    http_method_names = ["post",]
+    #queryset = StudyId.objects.all()
+    
+
+    def post(self, request, format=None):
+        serializer = Datalistserializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        
