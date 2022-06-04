@@ -46,13 +46,42 @@ const SettingsScreen = ({ route }) => {
       if (Platform.OS == "android") {
         if (NativeModules.UsageStat.init()) {
           NativeModules.UsageStat.loadStatistics()
-            .then(rp => console.log("ret", rp))
+            .then(submitStat)
             .catch(r => console.error("error", r))
         }
       }
     }
     fetchData()
   }, [])
+
+  const submitStat = data => {
+    data.map(data => {
+      const payload = {
+        study_id: user.study_id,
+        subject_id: user.subject_id,
+        first_timestamp: data.first_timestamp,
+        last_timestamp: data.last_timestamp,
+        content_title: data.name
+      }
+      const onSuccess = async ({ data }) => {
+        setIsLoading(false)
+        console.log(data)
+      }
+
+      const onFailure = error => {
+        setIsLoading(false)
+        console.log(error.response.data)
+        error = error.response.data
+        error = error[Object.keys(error)[0]]
+        Alert.alert("Error", error[0])
+      }
+
+      // Show spinner when call is made
+      setIsLoading(true)
+
+      APIKit.post("/api/v1/datalist/", payload).then(onSuccess).catch(onFailure)
+    })
+  }
 
   useEffect(() => {
     getSudyIds()
