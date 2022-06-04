@@ -4,13 +4,15 @@ from rest_framework.routers import DefaultRouter
 from home.api.v1.viewsets import (
     SignupViewSet,
     LoginViewSet,
-    StudyViewSet
+    StudyViewSet,
+    DataListView
 )
 
 router = DefaultRouter()
 router.register("signup", SignupViewSet, basename="signup")
 router.register("login", LoginViewSet, basename="login")
 router.register("studyid", StudyViewSet, basename="studyviewset")
+router.register("datalist", DataListView, basename="datalist")
 
 
 urlpatterns = [
