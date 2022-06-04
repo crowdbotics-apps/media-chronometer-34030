@@ -39,15 +39,18 @@ const LoginScreen = ({ route }) => {
 
   const [isSelecting, setIsSelecting] = useState(false)
 
-  useEffect(async () => {
-    Persistence.getUserProfileData().then(data => {
-      if (data?.study_id) {
-        onChange(data)
-        navigationService.replace(screenConstants.SettingsScreen)
-      } else {
-        getSudyIds()
-      }
-    })
+  useEffect(() => {
+    async function fetchData() {
+      Persistence.getUserProfileData().then(data => {
+        if (data?.study_id) {
+          onChange(data)
+          navigationService.replace(screenConstants.SettingsScreen)
+        } else {
+          getSudyIds()
+        }
+      })
+    }
+    fetchData()
   }, [])
 
   getSudyIds = () => {

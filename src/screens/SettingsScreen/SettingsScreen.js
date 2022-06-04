@@ -47,7 +47,7 @@ const SettingsScreen = ({ route }) => {
     }
   }, [])
 
-  useEffect(async () => {
+  useEffect(() => {
     getSudyIds()
   }, [])
 
@@ -101,9 +101,7 @@ const SettingsScreen = ({ route }) => {
             onPress={() => setIsSelecting(!isSelecting)}
           >
             <CustomText
-              text={
-                !selectedStudy ? "Select Study ID" : selectedStudy.study_id
-              }
+              text={!selectedStudy ? "Select Study ID" : selectedStudy.study_id}
               style={{ fontWeight: "500", fontSize: 16, color: "#000000BF" }}
             />
             {isSelecting ? (
