@@ -42,9 +42,16 @@ const SettingsScreen = ({ route }) => {
   const [isSelecting, setIsSelecting] = useState(false)
 
   useEffect(() => {
-    if (Platform.OS == "android") {
-      NativeModules.UsageStat.init()
+    async function fetchData() {
+      if (Platform.OS == "android") {
+        if (NativeModules.UsageStat.init()) {
+          NativeModules.UsageStat.loadStatistics()
+            .then(rp => console.log("ret", rp))
+            .catch(r => console.error("error", r))
+        }
+      }
     }
+    fetchData()
   }, [])
 
   useEffect(() => {

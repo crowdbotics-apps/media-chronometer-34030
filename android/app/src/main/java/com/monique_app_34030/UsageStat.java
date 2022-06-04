@@ -18,15 +18,13 @@ import android.graphics.drawable.Drawable;
 import android.net.IpSecManager;
 import android.os.Bundle;
 import android.provider.Settings;
-
-import android.widget.Toast;
+import com.facebook.react.bridge.*;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
-import java.util.SortedMap;
 import java.util.TreeMap;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
@@ -50,18 +48,13 @@ public class UsageStat extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod(isBlockingSynchronousMethod = true)
-    private void init() {
+    private boolean init() {
         Context context = getReactApplicationContext();
         if (getGrantStatus()) {
-            showHideWithPermission();
-
-            Toast.makeText(context, "there is permission", Toast.LENGTH_LONG).show();
-
-            loadStatistics();
+            return true;
         } else {
-            showHideNoPermission();
             context.startActivity(new Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS));
-            Toast.makeText(context, "there is no permission", Toast.LENGTH_LONG).show();
+            return false;
         }
     }
 
@@ -82,28 +75,12 @@ public class UsageStat extends ReactContextBaseJavaModule {
         }
     }
 
-    public void showHideNoPermission() {
-        // enableBtn.setVisibility(View.VISIBLE);
-        // permissionDescriptionTv.setVisibility(View.VISIBLE);
-        // showBtn.setVisibility(View.GONE);
-        // usageTv.setVisibility(View.GONE);
-        // appsList.setVisibility(View.GONE);
-
-    }
-
-    public void showHideWithPermission() {
-        // enableBtn.setVisibility(View.GONE);
-        // permissionDescriptionTv.setVisibility(View.GONE);
-        // showBtn.setVisibility(View.VISIBLE);
-        // usageTv.setVisibility(View.GONE);
-        // appsList.setVisibility(View.GONE);
-    }
-
     /**
      * load the usage stats for last 24h
      */
 
-    public void loadStatistics() {
+    @ReactMethod
+    public void loadStatistics(Promise promise) {
         Context context = getReactApplicationContext();
         UsageStatsManager usm = (UsageStatsManager) context.getSystemService(context.USAGE_STATS_SERVICE);
         List<UsageStats> appList = usm.queryUsageStats(UsageStatsManager.INTERVAL_DAILY,
@@ -112,16 +89,34 @@ public class UsageStat extends ReactContextBaseJavaModule {
 
         // Group the usageStats by application and sort them by total time in foreground
         if (appList.size() > 0) {
-            Map<String, UsageStats> mySortedMap = new TreeMap<>();
+            WritableArray app_list = new WritableNativeArray();
             for (UsageStats usageStats : appList) {
-                mySortedMap.put(usageStats.getPackageName(), usageStats);
-                Log.d("Stat",
-                        "| first: " + String.valueOf(usageStats.getFirstTimeStamp()) + "| last timestamp: "
-                                + String.valueOf(usageStats.getLastTimeStamp()) + "| last time: "
-                                + String.valueOf(usageStats.getLastTimeUsed()) + "| name: "
-                                + usageStats.getPackageName());
+                try {
+
+                    WritableMap info = new WritableNativeMap();
+
+                    String[] packageNames = usageStats.getPackageName().split("\\.");
+                    String appName = packageNames[packageNames.length - 1].trim();
+
+                    info.putString("name", appName);
+                    info.putString("package_id", usageStats.getPackageName());
+                    info.putString("first_timestamp", String.valueOf(usageStats.getFirstTimeStamp()));
+                    info.putString("last_timestamp", String.valueOf(usageStats.getLastTimeStamp()));
+
+                    // ...
+
+                    app_list.pushMap(info);
+                } catch (Exception ex) {
+                    System.err.println("Exception: " + ex.getMessage());
+                }
             }
-            // showAppsUsage(mySortedMap);
+
+            try {
+
+                promise.resolve(app_list);
+            } catch (Exception e) {
+                promise.reject("Create Event Error", e);
+            }
         }
     }
 
