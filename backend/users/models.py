@@ -41,7 +41,7 @@ class Datalist(models.Model):
         _("Study ID"), blank=True, null=True, max_length=255)
 
     subject_id = models.CharField(
-        _("Study ID"), blank=True, null=True, max_length=255)   
+        _("Subject ID"), blank=True, null=True, max_length=255)   
 
     first_timestamp = models.CharField(
         _("First TimeStamp"), blank=True, null=True, max_length=255)   
@@ -54,4 +54,5 @@ class Datalist(models.Model):
         _("Content Title"), blank=True, null=True, max_length=255)           
 
     def __str__(self):
-        return str(self.study_id,self.subject_id,self.content_title)
+        return f'{self.study_id} {self.subject_id}{self.content_title}'
+        
