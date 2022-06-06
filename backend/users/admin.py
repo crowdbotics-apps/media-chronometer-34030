@@ -3,7 +3,7 @@ from django.contrib.auth import admin as auth_admin
 from django.contrib.auth import get_user_model
 
 from users.forms import UserChangeForm, UserCreationForm
-from users.models import StudyId
+from users.models import StudyId,Datalist
 
 User = get_user_model()
 
@@ -19,5 +19,5 @@ class UserAdmin(auth_admin.UserAdmin):
 
 
 #For add the Profile Model
-model_list = [StudyId]
+model_list = [StudyId,Datalist]
 admin.site.register(model_list)
