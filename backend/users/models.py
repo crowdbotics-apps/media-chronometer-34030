@@ -54,5 +54,5 @@ class Datalist(models.Model):
         _("Content Title"), blank=True, null=True, max_length=255)           
 
     def __str__(self):
-        return f'{self.study_id} {self.subject_id}{self.content_title}'
+        return {self.content_title}
         
