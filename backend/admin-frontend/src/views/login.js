@@ -1,12 +1,12 @@
-import React from "react";
+import React from "react"
 
-import { Helmet } from "react-helmet";
-import { useHistory } from "react-router-dom";
+import { Helmet } from "react-helmet"
+import { useHistory } from "react-router-dom"
 
-import "./login.css";
+import "./login.css"
 
-const Login4112 = (props) => {
-  const history = useHistory();
+const Login4112 = props => {
+  const history = useHistory()
   return (
     <div className="login4112-container">
       <Helmet>
@@ -65,12 +65,15 @@ const Login4112 = (props) => {
             </div>
           </div>
         </div>
-        <div className="login4112-group174449" onClick={()=>history.push(`/change-password`) }>
+        <div
+          className="login4112-group174449"
+          onClick={() => history.push(`/change-password`)}
+        >
           <span className="login4112-text6">Login</span>
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Login4112;
+export default Login4112

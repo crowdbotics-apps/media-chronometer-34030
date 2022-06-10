@@ -1,12 +1,12 @@
-import React from "react";
+import React from "react"
 
-import { Helmet } from "react-helmet";
-import { useHistory } from "react-router-dom";
+import { Helmet } from "react-helmet"
+import { useHistory } from "react-router-dom"
 
-import "./change-password.css";
+import "./change-password.css"
 
-const ChangePassword4450 = (props) => {
-  const history = useHistory();
+const ChangePassword4450 = props => {
+  const history = useHistory()
   return (
     <div className="change-password4450-container">
       <Helmet>
@@ -90,7 +90,7 @@ const ChangePassword4450 = (props) => {
         </div>
         <div
           className="change-password4450-group174470"
-          onClick={() => history.push(`/current-studies`)}
+          onClick={() => history.push(`/dashboard`)}
         >
           <span className="change-password4450-text5">Submit New Password</span>
         </div>
@@ -100,7 +100,7 @@ const ChangePassword4450 = (props) => {
         </span>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default ChangePassword4450;
+export default ChangePassword4450

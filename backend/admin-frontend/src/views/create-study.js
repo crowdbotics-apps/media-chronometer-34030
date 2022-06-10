@@ -1,13 +1,13 @@
-import React from "react";
+import React from "react"
 
-import { Helmet } from "react-helmet";
-import { useState } from "react/cjs/react.development";
+import { Helmet } from "react-helmet"
+import { useState } from "react/cjs/react.development"
 
-import "./create-study.css";
+import "./create-study.css"
 
-const CreateStudy1111677 = (props) => {
-  const [isSubject, setIsSubject] = useState(false);
-  const [subjects, setSubjects] = useState([]);
+const CreateStudy1111677 = props => {
+  const [isSubject, setIsSubject] = useState(false)
+  const [subjects, setSubjects] = useState([])
   return (
     <div className="create-study1111677-container">
       <Helmet>
@@ -77,8 +77,8 @@ const CreateStudy1111677 = (props) => {
             <button
               className="create-study-add-subject-i-d-s1111868-button-primary-medium1111916"
               onClick={() => {
-                setSubjects(subjects.concat({}));
-                setIsSubject(false);
+                setSubjects(subjects.concat({}))
+                setIsSubject(false)
               }}
             >
               <span className="create-study-add-subject-i-d-s1111868-text09">
@@ -103,7 +103,7 @@ const CreateStudy1111677 = (props) => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default CreateStudy1111677;
+export default CreateStudy1111677

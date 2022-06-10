@@ -1,12 +1,12 @@
-import React from "react";
+import React from "react"
 
-import { Helmet } from "react-helmet";
-import { useHistory } from "react-router-dom";
+import { Helmet } from "react-helmet"
+import { useHistory } from "react-router-dom"
 
-import "./current-studies.css";
+import "./current-studies.css"
 
-const CurrentStudies1111180 = (props) => {
-  const history = useHistory();
+const CurrentStudies1111180 = props => {
+  const history = useHistory()
   return (
     <div className="current-studies1111180-container">
       <Helmet>
@@ -68,7 +68,7 @@ const CurrentStudies1111180 = (props) => {
                 19.000
                 <span
                   dangerouslySetInnerHTML={{
-                    __html: " ",
+                    __html: " "
                   }}
                 />
               </span>
@@ -98,7 +98,7 @@ const CurrentStudies1111180 = (props) => {
                 19.000
                 <span
                   dangerouslySetInnerHTML={{
-                    __html: " ",
+                    __html: " "
                   }}
                 />
               </span>
@@ -128,7 +128,7 @@ const CurrentStudies1111180 = (props) => {
                 19.000
                 <span
                   dangerouslySetInnerHTML={{
-                    __html: " ",
+                    __html: " "
                   }}
                 />
               </span>
@@ -158,7 +158,7 @@ const CurrentStudies1111180 = (props) => {
                 19.000
                 <span
                   dangerouslySetInnerHTML={{
-                    __html: " ",
+                    __html: " "
                   }}
                 />
               </span>
@@ -188,7 +188,7 @@ const CurrentStudies1111180 = (props) => {
                 19.000
                 <span
                   dangerouslySetInnerHTML={{
-                    __html: " ",
+                    __html: " "
                   }}
                 />
               </span>
@@ -218,7 +218,7 @@ const CurrentStudies1111180 = (props) => {
                 19.000
                 <span
                   dangerouslySetInnerHTML={{
-                    __html: " ",
+                    __html: " "
                   }}
                 />
               </span>
@@ -248,7 +248,7 @@ const CurrentStudies1111180 = (props) => {
                 19.000
                 <span
                   dangerouslySetInnerHTML={{
-                    __html: " ",
+                    __html: " "
                   }}
                 />
               </span>
@@ -290,10 +290,10 @@ const CurrentStudies1111180 = (props) => {
                     className="current-studies1111180-image6"
                   />
 
-                <select className="current-studies1111180-text61" name="sort">
-                  <option value="ascending">Ascending</option>
-                  <option value="decending">Decending</option>
-                </select>
+                  <select className="current-studies1111180-text61" name="sort">
+                    <option value="ascending">Ascending</option>
+                    <option value="decending">Decending</option>
+                  </select>
                 </div>
               </div>
             </div>
@@ -307,7 +307,7 @@ const CurrentStudies1111180 = (props) => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default CurrentStudies1111180;
+export default CurrentStudies1111180

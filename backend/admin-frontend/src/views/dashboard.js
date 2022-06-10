@@ -1,19 +1,19 @@
-import React from "react";
+import React from "react"
 
-import { Helmet } from "react-helmet";
-import { Switch } from "react-router-dom";
-import { useRouteMatch } from "react-router-dom";
-import { NavLink } from "react-router-dom";
-import { Link } from "react-router-dom";
-import { Route } from "react-router-dom";
-import CreateStudy1111677 from "./create-study";
-import CurrentStudies1111180 from "./current-studies";
-import DataView110763 from "./data-view";
+import { Helmet } from "react-helmet"
+import { Switch } from "react-router-dom"
+import { useRouteMatch } from "react-router-dom"
+import { NavLink } from "react-router-dom"
+import { Link } from "react-router-dom"
+import { Route } from "react-router-dom"
+import CreateStudy1111677 from "./create-study"
+import CurrentStudies1111180 from "./current-studies"
+import DataView110763 from "./data-view"
 
-import "./dashboard.css";
+import "./dashboard.css"
 
-const Dashboard = (props) => {
-  let { path, url } = useRouteMatch();
+const Dashboard = props => {
+  let { path, url } = useRouteMatch()
   return (
     <div className="data-view110763-container">
       <Helmet>
@@ -44,7 +44,7 @@ const Dashboard = (props) => {
             to={url}
             activeStyle={{
               backgroundColor: "rgba(37, 117, 252, 1)",
-              color: "#fff",
+              color: "#fff"
             }}
           >
             <div className="data-view110763-frame1861101092">
@@ -60,7 +60,7 @@ const Dashboard = (props) => {
             to={`${url}/current-studies`}
             activeStyle={{
               backgroundColor: "rgba(37, 117, 252, 1)",
-              color: "#fff",
+              color: "#fff"
             }}
           >
             <div className="data-view110763-frame1871101095">
@@ -78,7 +78,7 @@ const Dashboard = (props) => {
             to={`${url}/create-study`}
             activeStyle={{
               backgroundColor: "rgba(37, 117, 252, 1)",
-              color: "#fff",
+              color: "#fff"
             }}
           >
             <div className="data-view110763-frame1881101098">
@@ -697,7 +697,7 @@ const Dashboard = (props) => {
         </div> */}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Dashboard;
+export default Dashboard

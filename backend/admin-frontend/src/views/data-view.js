@@ -1,10 +1,10 @@
-import React from "react";
+import React from "react"
 
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet"
 
-import "./data-view.css";
+import "./data-view.css"
 
-const DataView110763 = (props) => {
+const DataView110763 = props => {
   return (
     <div className="data-view110763-container">
       <Helmet>
@@ -617,7 +617,7 @@ const DataView110763 = (props) => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default DataView110763;
+export default DataView110763
