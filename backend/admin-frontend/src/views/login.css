@@ -1,0 +1,291 @@
+.login4112-container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+}
+input:focus{
+  outline: none;
+}
+.login4112-login4112 {
+  width: 1440px;
+  height: 1024px;
+  display: flex;
+  overflow: hidden;
+  position: relative;
+  max-width: 1440px;
+  box-sizing: border-box;
+  align-items: flex-start;
+  border-color: transparent;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+.login4112-image {
+  top: 72px;
+  left: 162px;
+  width: 1116px;
+  height: 800px;
+  position: absolute;
+  box-sizing: border-box;
+  object-fit: cover;
+  border-color: transparent;
+  border-radius: 0 0 24px 24px;
+  background-color: rgba(248, 248, 248, 1);
+}
+.login4112-text {
+  top: 214px;
+  left: 535px;
+  color: rgba(51, 51, 51, 0.6000000238418579);
+  width: 370px;
+  height: auto;
+  position: absolute;
+  font-size: 14px;
+  align-self: auto;
+  font-style: normal;
+  text-align: center;
+  font-family: Raleway;
+  font-weight: 400px;
+  line-height: 139.9999976158142%;
+  font-stretch: normal;
+  text-decoration: none;
+}
+.login4112-text1 {
+  top: 164px;
+  left: 559px;
+  color: rgba(51, 51, 51, 1);
+  height: auto;
+  position: absolute;
+  font-size: 24px;
+  align-self: auto;
+  font-style: normal;
+  text-align: left;
+  font-family: Raleway;
+  font-weight: 500px;
+  line-height: 139.9999976158142%;
+  font-stretch: normal;
+  text-decoration: none;
+}
+.login4112-image1 {
+  top: 0px;
+  left: 0px;
+  width: 1440px;
+  height: 72px;
+  position: absolute;
+  box-sizing: border-box;
+  object-fit: cover;
+  border-color: rgba(0, 0, 0, 0.20000000298023224);
+  border-style: solid;
+  border-width: 1px;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+.login4112-frame1824427 {
+  top: 290px;
+  left: 472px;
+  width: 497px;
+  display: flex;
+  position: absolute;
+  box-sizing: border-box;
+  align-items: flex-start;
+  flex-shrink: 1;
+  border-color: transparent;
+  flex-direction: column;
+}
+.login4112-text2 {
+  color: rgba(51, 51, 51, 0.6000000238418579);
+  height: auto;
+  margin: 0 0 16px 0;
+  font-size: 14px;
+  align-self: auto;
+  font-style: normal;
+  text-align: center;
+  font-family: Raleway;
+  font-weight: 500px;
+  line-height: 158.00000429153442%;
+  font-stretch: normal;
+  text-decoration: none;
+}
+.login4112-group164426 {
+  width: 497px;
+  height: 59px;
+  display: flex;
+  position: relative;
+  box-sizing: border-box;
+  align-items: flex-start;
+  flex-shrink: 1;
+  border-color: transparent;
+  background-color: rgba(236, 236, 236, 1);
+}
+.login4112-group154425 {
+  top: 17px;
+  left: 16px;
+  width: 329px;
+  height: 26px;
+  display: flex;
+  position: absolute;
+  box-sizing: border-box;
+  align-items: flex-start;
+  flex-shrink: 1;
+  border-color: transparent;
+}
+.login4112-text3 {
+  top: 1px;
+  left: 50px;
+  color: rgba(51, 51, 51, 1);
+  width: 100%;
+  background: transparent;
+  height: auto;
+  position: absolute;
+  font-size: 16px;
+  align-self: auto;
+  font-style: normal;
+  text-align: left;
+  font-family: Raleway;
+  font-weight: 400px;
+  line-height: 158.00000429153442%;
+  font-stretch: normal;
+  text-decoration: none;
+}
+.login4112-iconly-bold-message4419 {
+  top: 0px;
+  left: 0px;
+  width: 26px;
+  height: 26px;
+  display: flex;
+  position: absolute;
+  box-sizing: border-box;
+  align-items: flex-start;
+  border-color: transparent;
+}
+.login4112-message4420 {
+  top: 3.25px;
+  left: 2.1670982837677px;
+  width: 22px;
+  height: 19.5px;
+  display: flex;
+  position: absolute;
+  box-sizing: border-box;
+  align-items: flex-start;
+  flex-shrink: 1;
+  border-color: transparent;
+}
+.login4112-svg {
+  width: 22;
+  height: 20;
+  position: absolute;
+}
+.login4112-frame1834428 {
+  top: 423px;
+  left: 472px;
+  width: 497px;
+  display: flex;
+  position: absolute;
+  box-sizing: border-box;
+  align-items: flex-start;
+  flex-shrink: 1;
+  border-color: transparent;
+  flex-direction: column;
+}
+.login4112-text4 {
+  color: rgba(51, 51, 51, 0.6000000238418579);
+  height: auto;
+  margin: 0 0 16px 0;
+  font-size: 14px;
+  align-self: auto;
+  font-style: normal;
+  text-align: center;
+  font-family: Raleway;
+  font-weight: 500px;
+  line-height: 158.00000429153442%;
+  font-stretch: normal;
+  text-decoration: none;
+}
+.login4112-group164430 {
+  width: 497px;
+  height: 59px;
+  display: flex;
+  position: relative;
+  box-sizing: border-box;
+  align-items: flex-start;
+  flex-shrink: 1;
+  border-color: transparent;
+  background-color: rgba(236, 236, 236, 1);
+}
+.login4112-frame154432 {
+  top: 17px;
+  left: 16px;
+  width: 165px;
+  display: flex;
+  position: absolute;
+  box-sizing: border-box;
+  align-items: flex-end;
+  flex-shrink: 1;
+  border-color: transparent;
+}
+.login4112-iconly-bold-lock4439 {
+  width: 26px;
+  height: 26px;
+  margin: 0 24px 0 0;
+  display: flex;
+  position: relative;
+  box-sizing: border-box;
+  align-items: flex-start;
+  border-color: transparent;
+}
+.login4112-lock4440 {
+  top: 2.1666665077209473px;
+  left: 3.791668176651001px;
+  width: 18px;
+  height: 21.666667938232422px;
+  display: flex;
+  position: absolute;
+  box-sizing: border-box;
+  align-items: flex-start;
+  flex-shrink: 1;
+  border-color: transparent;
+}
+.login4112-svg1 {
+  width: 18;
+  height: 22;
+  position: absolute;
+}
+.login4112-text5 {
+  color: rgba(51, 51, 51, 1);
+  height: auto;
+  font-size: 16px;
+  align-self: auto;
+  font-style: normal;
+  text-align: left;
+  font-family: Raleway;
+  font-weight: 400px;
+  line-height: 158.00000429153442%;
+  font-stretch: normal;
+  text-decoration: none;
+}
+.login4112-group174449 {
+  top: 568px;
+  left: 570px;
+  width: 300px;
+  height: 59px;
+  display: flex;
+  position: absolute;
+  box-sizing: border-box;
+  align-items: flex-start;
+  flex-shrink: 1;
+  border-color: transparent;
+  background-color: rgba(37, 117, 252, 1);
+  cursor: pointer;
+}
+.login4112-text6 {
+  top: 19px;
+  left: 128px;
+  color: rgba(255, 255, 255, 1);
+  height: auto;
+  position: absolute;
+  font-size: 16px;
+  align-self: auto;
+  font-style: normal;
+  text-align: left;
+  font-family: Raleway;
+  font-weight: 600px;
+  line-height: 139.9999976158142%;
+  font-stretch: normal;
+  text-decoration: none;
+}
