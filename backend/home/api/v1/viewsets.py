@@ -84,8 +84,17 @@ class DataListView(ModelViewSet):
             print(data.first_timestamp)
             _first_timestamp = data.first_timestamp
             _last_timestamp = data.last_timestamp
-            converted_first_timestamp = datetime.datetime.fromtimestamp(int(_first_timestamp))
-            converted_last_timestamp = datetime.datetime.fromtimestamp(int(_last_timestamp))
+
+            try:
+                # when timestamp is in seconds
+                converted_first_timestamp = datetime.datetime.fromtimestamp(int(_first_timestamp))
+                converted_last_timestamp = datetime.datetime.fromtimestamp(int(_last_timestamp))
+            except (ValueError):
+                # when timestamp is in miliseconds
+                converted_first_timestamp = datetime.datetime.fromtimestamp(int(_first_timestamp) / 1000)
+                converted_last_timestamp = datetime.datetime.fromtimestamp(int(_last_timestamp)/1000)
+            #converted_first_timestamp = datetime.datetime.fromtimestamp(int(_first_timestamp))
+            # converted_last_timestamp = datetime.datetime.fromtimestamp(int(_last_timestamp))
             data_start = converted_first_timestamp.strftime('%H:%M %p')
             date_end = converted_last_timestamp.strftime('%H:%M %p')
 
