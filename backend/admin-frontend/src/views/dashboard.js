@@ -41,7 +41,7 @@ const Dashboard = props => {
         </Switch>
         <div className="data-view110763-frame1891101091">
           <NavLink
-            to={url}
+            to={path}
             activeStyle={{
               backgroundColor: "rgba(37, 117, 252, 1)",
               color: "#fff"
@@ -57,7 +57,7 @@ const Dashboard = props => {
             </div>
           </NavLink>
           <NavLink
-            to={`${url}/current-studies`}
+            to={`${path}/current-studies`}
             activeStyle={{
               backgroundColor: "rgba(37, 117, 252, 1)",
               color: "#fff"
@@ -75,7 +75,7 @@ const Dashboard = props => {
             </div>
           </NavLink>
           <NavLink
-            to={`${url}/create-study`}
+            to={`${path}/create-study`}
             activeStyle={{
               backgroundColor: "rgba(37, 117, 252, 1)",
               color: "#fff"
