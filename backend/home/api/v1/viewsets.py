@@ -9,10 +9,11 @@ from home.api.v1.serializers import (
     SignupSerializer,
     UserSerializer,
     StudySerializer,
-    Datalistserializer
+    Datalistserializer,
+    
 )
 
-from users.models import StudyId
+from users.models import StudyId,Datalist
 class SignupViewSet(ModelViewSet):
     serializer_class = SignupSerializer
     http_method_names = ["post"]
@@ -62,15 +63,51 @@ class StudyViewSet(ModelViewSet):
 
 #Added for DataList
 
-
+import datetime
+from django.utils import timezone
 class DataListView(ModelViewSet):
     """
     List all snippets, or create a new snippet.
     """
     serializer_class = Datalistserializer
-    http_method_names = ["post",]
-    #queryset = StudyId.objects.all()
+    http_method_names = ["post","get"]
+    #queryset = Datalist.objects.all()
     
+
+    def get_queryset(self):
+        
+        datalist = list(Datalist.objects.all())
+        
+
+        
+        for data in datalist:
+            print(data.first_timestamp)
+            _first_timestamp = data.first_timestamp
+            _last_timestamp = data.last_timestamp
+
+            try:
+                # when timestamp is in seconds
+                converted_first_timestamp = datetime.datetime.fromtimestamp(int(_first_timestamp))
+                converted_last_timestamp = datetime.datetime.fromtimestamp(int(_last_timestamp))
+            except (ValueError):
+                # when timestamp is in miliseconds
+                converted_first_timestamp = datetime.datetime.fromtimestamp(int(_first_timestamp) / 1000)
+                converted_last_timestamp = datetime.datetime.fromtimestamp(int(_last_timestamp)/1000)
+            #converted_first_timestamp = datetime.datetime.fromtimestamp(int(_first_timestamp))
+            # converted_last_timestamp = datetime.datetime.fromtimestamp(int(_last_timestamp))
+            data_start = converted_first_timestamp.strftime('%H:%M %p')
+            date_end = converted_last_timestamp.strftime('%H:%M %p')
+
+            data.first_timestamp =  data_start
+            data.last_timestamp = date_end
+
+            
+        return datalist
+            
+
+       
+        #print(datalist)                                         
+        
 
     def post(self, request, format=None):
         serializer = Datalistserializer(data=request.data)
@@ -79,3 +116,9 @@ class DataListView(ModelViewSet):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         
+
+
+
+
+      
+
