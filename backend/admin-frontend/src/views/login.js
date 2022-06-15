@@ -1,16 +1,45 @@
 import React from "react"
+import { useState } from "react"
 
 import { Helmet } from "react-helmet"
 import { useHistory } from "react-router-dom"
+import { setJWTToken } from "../api/auth"
+import { basic_api } from "../api/axios_helper"
 
 import "./login.css"
 
 const Login4112 = props => {
   const history = useHistory()
+
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+  const [isLoading, setIsloading] = useState(false)
+
+  const logIn = () => {
+    history.push("/dashboard")
+    if (isLoading) return
+    const formData = new FormData()
+    formData.append("email", email)
+    formData.append("password", password)
+    setIsloading(true)
+    basic_api
+      .post("/api/v1/login/", formData)
+      .then(response => {
+        setIsloading(false)
+        setJWTToken(response?.data?.token)
+        history.push("/dashboard")
+      })
+      .catch(error => {
+        console.log(error.response.data)
+        setIsloading(false)
+        // setDisableFields(false);
+      })
+      .then(() => {})
+  }
   return (
     <div className="login4112-container">
       <Helmet>
-        <title>exported project</title>
+        <title>login</title>
       </Helmet>
       <div className="login4112-login4112">
         <img
@@ -35,6 +64,9 @@ const Login4112 = props => {
               <input
                 className="login4112-text3"
                 placeholder="Enter your super admin email address"
+                value={email}
+                required
+                onChange={e => setEmail(e.target.value)}
               />
               <div className="login4112-iconly-bold-message4419">
                 <div className="login4112-message4420">
@@ -52,7 +84,13 @@ const Login4112 = props => {
           <span className="login4112-text4">Password</span>
           <div className="login4112-group164430">
             <div className="login4112-frame154432">
-              <input className="login4112-text3" placeholder="Enter password" />
+              <input
+                className="login4112-text3"
+                placeholder="Enter password"
+                value={password}
+                required
+                onChange={e => setPassword(e.target.value)}
+              />
               <div className="login4112-iconly-bold-lock4439">
                 <div className="login4112-lock4440">
                   <img
@@ -65,10 +103,7 @@ const Login4112 = props => {
             </div>
           </div>
         </div>
-        <div
-          className="login4112-group174449"
-          onClick={() => history.push(`/change-password`)}
-        >
+        <div className="login4112-group174449" onClick={logIn}>
           <span className="login4112-text6">Login</span>
         </div>
       </div>
