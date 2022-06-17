@@ -41,6 +41,7 @@
 		9D567802F45BC70914064E06 /* Pods-monique_app_34030.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-monique_app_34030.release.xcconfig"; path = "Target Support Files/Pods-monique_app_34030/Pods-monique_app_34030.release.xcconfig"; sourceTree = "<group>"; };
 		A96FDB7E0B6DD1E29388696C /* Pods-monique_app_34030-monique_app_34030Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-monique_app_34030-monique_app_34030Tests.debug.xcconfig"; path = "Target Support Files/Pods-monique_app_34030-monique_app_34030Tests/Pods-monique_app_34030-monique_app_34030Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		ADCF39E7DCD20C23DD0406CC /* libPods-monique_app_34030.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-monique_app_34030.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CB233764285CA55400215CF6 /* monique_app_34030.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = monique_app_34030.entitlements; path = monique_app_34030/monique_app_34030.entitlements; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		FC17DB3A7D46864973B03916 /* Pods-monique_app_34030-monique_app_34030Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-monique_app_34030-monique_app_34030Tests.release.xcconfig"; path = "Target Support Files/Pods-monique_app_34030-monique_app_34030Tests/Pods-monique_app_34030-monique_app_34030Tests.release.xcconfig"; sourceTree = "<group>"; };
 		FE46BF75BEEA5C5D36C09B5A /* Pods-monique_app_34030.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-monique_app_34030.debug.xcconfig"; path = "Target Support Files/Pods-monique_app_34030/Pods-monique_app_34030.debug.xcconfig"; sourceTree = "<group>"; };
@@ -86,6 +87,7 @@
 		13B07FAE1A68108700A75B9A /* monique_app_34030 */ = {
 			isa = PBXGroup;
 			children = (
+				CB233764285CA55400215CF6 /* monique_app_34030.entitlements */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
@@ -447,6 +449,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = monique_app_34030/monique_app_34030.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = monique_app_34030/Info.plist;
@@ -473,6 +476,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = monique_app_34030/monique_app_34030.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
 				INFOPLIST_FILE = monique_app_34030/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
