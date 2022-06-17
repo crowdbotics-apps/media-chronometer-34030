@@ -1,7 +1,7 @@
 import React from "react"
+import { useState } from "react"
 
 import { Helmet } from "react-helmet"
-import { useState } from "react/cjs/react.development"
 
 import "./create-study.css"
 
@@ -11,7 +11,7 @@ const CreateStudy1111677 = props => {
   return (
     <div className="create-study1111677-container">
       <Helmet>
-        <title>exported project</title>
+        <title>Create Study</title>
       </Helmet>
       <div className="create-study1111677-create-study1111677">
         <img

@@ -10,7 +10,7 @@ const ChangePassword4450 = props => {
   return (
     <div className="change-password4450-container">
       <Helmet>
-        <title>exported project</title>
+        <title>Change password</title>
       </Helmet>
       <div className="change-password4450-change-password4450">
         <img

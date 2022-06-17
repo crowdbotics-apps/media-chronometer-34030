@@ -31,7 +31,7 @@ const DataView110763 = props => {
   return (
     <div className="data-view110763-container">
       <Helmet>
-        <title>exported project</title>
+        <title>Dashboadrd | Data View</title>
       </Helmet>
       <div className="data-view110763-data-view110763">
         <img

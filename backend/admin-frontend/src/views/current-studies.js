@@ -1,16 +1,14 @@
 import React from "react"
 
 import { Helmet } from "react-helmet"
-import { useHistory } from "react-router-dom"
 
 import "./current-studies.css"
 
 const CurrentStudies1111180 = props => {
-  const history = useHistory()
   return (
     <div className="current-studies1111180-container">
       <Helmet>
-        <title>exported project</title>
+        <title>Currend Study</title>
       </Helmet>
       <div className="current-studies1111180-current-studies1111180">
         <img
