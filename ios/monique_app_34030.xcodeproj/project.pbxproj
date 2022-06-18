@@ -13,6 +13,8 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		1AD4BDC876AEA58BCA7FEA4C /* libPods-monique_app_34030-monique_app_34030Tests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 33FF3C282AC5D5EF04A20F2C /* libPods-monique_app_34030-monique_app_34030Tests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		CB3E9D47285DBE2D008D2E48 /* RNUsage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB3E9D46285DBE2D008D2E48 /* RNUsage.swift */; };
+		CB3E9D49285DBE75008D2E48 /* RNUsage.m in Sources */ = {isa = PBXBuildFile; fileRef = CB3E9D48285DBE75008D2E48 /* RNUsage.m */; };
 		DC23B1F8D1BCB74AD338B97C /* libPods-monique_app_34030.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADCF39E7DCD20C23DD0406CC /* libPods-monique_app_34030.a */; };
 /* End PBXBuildFile section */
 
@@ -42,6 +44,9 @@
 		A96FDB7E0B6DD1E29388696C /* Pods-monique_app_34030-monique_app_34030Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-monique_app_34030-monique_app_34030Tests.debug.xcconfig"; path = "Target Support Files/Pods-monique_app_34030-monique_app_34030Tests/Pods-monique_app_34030-monique_app_34030Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		ADCF39E7DCD20C23DD0406CC /* libPods-monique_app_34030.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-monique_app_34030.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB233764285CA55400215CF6 /* monique_app_34030.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = monique_app_34030.entitlements; path = monique_app_34030/monique_app_34030.entitlements; sourceTree = "<group>"; };
+		CB3E9D45285DBE2C008D2E48 /* monique_app_34030-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "monique_app_34030-Bridging-Header.h"; sourceTree = "<group>"; };
+		CB3E9D46285DBE2D008D2E48 /* RNUsage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RNUsage.swift; sourceTree = "<group>"; };
+		CB3E9D48285DBE75008D2E48 /* RNUsage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RNUsage.m; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		FC17DB3A7D46864973B03916 /* Pods-monique_app_34030-monique_app_34030Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-monique_app_34030-monique_app_34030Tests.release.xcconfig"; path = "Target Support Files/Pods-monique_app_34030-monique_app_34030Tests/Pods-monique_app_34030-monique_app_34030Tests.release.xcconfig"; sourceTree = "<group>"; };
 		FE46BF75BEEA5C5D36C09B5A /* Pods-monique_app_34030.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-monique_app_34030.debug.xcconfig"; path = "Target Support Files/Pods-monique_app_34030/Pods-monique_app_34030.debug.xcconfig"; sourceTree = "<group>"; };
@@ -94,6 +99,9 @@
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				13B07FB71A68108700A75B9A /* main.m */,
+				CB3E9D46285DBE2D008D2E48 /* RNUsage.swift */,
+				CB3E9D48285DBE75008D2E48 /* RNUsage.m */,
+				CB3E9D45285DBE2C008D2E48 /* monique_app_34030-Bridging-Header.h */,
 			);
 			name = monique_app_34030;
 			sourceTree = "<group>";
@@ -207,7 +215,7 @@
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
-						LastSwiftMigration = 1120;
+						LastSwiftMigration = 1330;
 					};
 				};
 			};
@@ -377,6 +385,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
+				CB3E9D49285DBE75008D2E48 /* RNUsage.m in Sources */,
+				CB3E9D47285DBE2D008D2E48 /* RNUsage.swift in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -396,6 +406,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A96FDB7E0B6DD1E29388696C /* Pods-monique_app_34030-monique_app_34030Tests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -423,6 +434,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = FC17DB3A7D46864973B03916 /* Pods-monique_app_34030-monique_app_34030Tests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
 				INFOPLIST_FILE = monique_app_34030Tests/Info.plist;
@@ -453,6 +465,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = monique_app_34030/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -464,6 +477,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = monique_app_34030;
+				SWIFT_OBJC_BRIDGING_HEADER = "monique_app_34030-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -479,6 +493,7 @@
 				CODE_SIGN_ENTITLEMENTS = monique_app_34030/monique_app_34030.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
 				INFOPLIST_FILE = monique_app_34030/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -490,6 +505,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = monique_app_34030;
+				SWIFT_OBJC_BRIDGING_HEADER = "monique_app_34030-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -550,8 +566,8 @@
 					"$(inherited)",
 				);
 				LIBRARY_SEARCH_PATHS = (
+					"$(SDKROOT)/usr/lib/swift",
 					"\"$(TOOLCHAIN_DIR)/usr/lib/swift/$(PLATFORM_NAME)\"",
-					"\"$(TOOLCHAIN_DIR)/usr/lib/swift-5.0/$(PLATFORM_NAME)\"",
 					"\"$(inherited)\"",
 				);
 				MTL_ENABLE_DEBUG_INFO = YES;
@@ -608,8 +624,8 @@
 					"$(inherited)",
 				);
 				LIBRARY_SEARCH_PATHS = (
+					"$(SDKROOT)/usr/lib/swift",
 					"\"$(TOOLCHAIN_DIR)/usr/lib/swift/$(PLATFORM_NAME)\"",
-					"\"$(TOOLCHAIN_DIR)/usr/lib/swift-5.0/$(PLATFORM_NAME)\"",
 					"\"$(inherited)\"",
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;

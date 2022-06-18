@@ -49,6 +49,8 @@ const SettingsScreen = ({ route }) => {
             .then(submitStat)
             .catch(r => console.error("error", r))
         }
+      } else if (Platform.OS == "ios") {
+        NativeModules.RNUsage.open()
       }
     }
     fetchData()
@@ -225,6 +227,12 @@ const SettingsScreen = ({ route }) => {
             />
           </Pressable>
         </View>
+        {Platform.OS == "ios" && (
+          <CustomText
+            style={{ textAlign: "center" }}
+            text="Please authorize Family Control and that's all"
+          />
+        )}
       </View>
     </View>
   )
