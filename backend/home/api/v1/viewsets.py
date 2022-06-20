@@ -72,6 +72,10 @@ class DataListView(ModelViewSet):
     serializer_class = Datalistserializer
     http_method_names = ["post","get"]
     #queryset = Datalist.objects.all()
+
+
+
+
     
 
     def get_queryset(self):
@@ -96,12 +100,16 @@ class DataListView(ModelViewSet):
             #converted_first_timestamp = datetime.datetime.fromtimestamp(int(_first_timestamp))
             # converted_last_timestamp = datetime.datetime.fromtimestamp(int(_last_timestamp))
             data_start = converted_first_timestamp.strftime('%H:%M %p')
-            date_end = converted_last_timestamp.strftime('%H:%M %p')
+            data_end = converted_last_timestamp.strftime('%H:%M %p')
+
+            date_start = converted_first_timestamp.strftime('%m/%d/%Y')
+            date_end = converted_last_timestamp.strftime('%m/%d/%Y')
 
             data.first_timestamp =  data_start
-            data.last_timestamp = date_end
+            data.last_timestamp = data_end
 
-            
+            data.date_start = date_start
+            data.date_end = date_end
         return datalist
             
 
@@ -122,3 +130,17 @@ class DataListView(ModelViewSet):
 
       
 
+class AdminLoginViewSet(ViewSet):
+    """Based on rest_framework.authtoken.views.ObtainAuthToken"""
+
+    serializer_class = AuthTokenSerializer
+
+    def create(self, request):
+        serializer = self.serializer_class(
+            data=request.data, context={"request": request}
+        )
+        serializer.is_valid(raise_exception=True)
+        user = serializer.validated_data["user"]
+        token, created = Token.objects.get_or_create(user=user)
+        user_serializer = UserSerializer(user)
+        return Response({"token": token.key, "user": user_serializer.data})
