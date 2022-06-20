@@ -71,7 +71,7 @@ const DataView110763 = props => {
               <div className="data-view110763-frame194110784">
                 <span
                   className="data-view110763-text008"
-                  style={{ overflow: "scroll", height: "20px" }}
+                  style={{ overflow: "hidden", height: "20px" }}
                 >
                   {data.study_id}
                 </span>
@@ -105,7 +105,7 @@ const DataView110763 = props => {
               <div className="data-view110763-frame200110797">
                 <span
                   className="data-view110763-text014"
-                  style={{ overflow: "scroll" }}
+                  style={{ overflow: "hidden" }}
                 >
                   {data.content_title}
                 </span>
