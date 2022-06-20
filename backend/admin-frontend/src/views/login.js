@@ -16,14 +16,13 @@ const Login4112 = props => {
   const [isLoading, setIsloading] = useState(false)
 
   const logIn = () => {
-    history.push("/dashboard")
     if (isLoading) return
     const formData = new FormData()
-    formData.append("email", email)
+    formData.append("username", email)
     formData.append("password", password)
     setIsloading(true)
     basic_api
-      .post("/api/v1/login/", formData)
+      .post("/api/v1/adminlogin/", formData)
       .then(response => {
         setIsloading(false)
         setJWTToken(response?.data?.token)
@@ -89,6 +88,7 @@ const Login4112 = props => {
                 placeholder="Enter password"
                 value={password}
                 required
+                type="password"
                 onChange={e => setPassword(e.target.value)}
               />
               <div className="login4112-iconly-bold-lock4439">
