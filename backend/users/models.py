@@ -41,7 +41,13 @@ class Datalist(models.Model):
         _("Study ID"), blank=True, null=True, max_length=255)
 
     subject_id = models.CharField(
-        _("Subject ID"), blank=True, null=True, max_length=255)   
+        _("Subject ID"), blank=True, null=True, max_length=255)  
+
+    date_start = models.CharField(
+        _("Date Start"), blank=True, null=True, max_length=255)  
+
+    date_end = models.CharField(
+        _("Date End"), blank=True, null=True, max_length=255)           
 
     first_timestamp = models.CharField(
         _("First TimeStamp"), blank=True, null=True, max_length=255)   

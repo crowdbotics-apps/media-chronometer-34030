@@ -87,8 +87,12 @@ class StudySerializer(serializers.ModelSerializer):
 
 
 class Datalistserializer(serializers.ModelSerializer):
+
+
     class Meta:
         model = Datalist
         fields = '__all__'   
+
+         
 
         
