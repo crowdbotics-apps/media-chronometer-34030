@@ -181,13 +181,6 @@ const DataView110763 = props => {
           alt="Rectangle151101139"
           className="data-view110763-image24"
         />
-        <div className="data-view110763-scrollbar1101140">
-          <img
-            src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0nMTInIGhlaWdodD0nMzA0JyB2aWV3Qm94PScwIDAgMTIgMzA0JyBmaWxsPSdub25lJyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnPgo8cmVjdCB3aWR0aD0nMTInIGhlaWdodD0nMzA0JyBmaWxsPScjRDlEOUQ5Jy8+Cjwvc3ZnPgo="
-            alt="Rectangle171101142"
-            className="data-view110763-image25"
-          />
-        </div>
         <div className="data-view110763-frame2191111178">
           <span className="data-view110763-text151">Export as CSV</span>
         </div>

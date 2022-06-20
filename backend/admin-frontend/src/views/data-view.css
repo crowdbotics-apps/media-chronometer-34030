@@ -38,6 +38,8 @@
   flex-shrink: 1;
   border-color: transparent;
   flex-direction: column;
+  height: 500px;
+  overflow-y: scroll;
 }
 .data-view110763-frame197110766 {
   display: flex;
