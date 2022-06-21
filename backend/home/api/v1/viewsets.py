@@ -4,15 +4,18 @@ from rest_framework.authtoken.models import Token
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import viewsets, status
+from rest_framework.permissions import IsAuthenticated, IsAdminUser
+from rest_framework.authentication import TokenAuthentication
 from django.http import HttpResponse, JsonResponse
 from home.api.v1.serializers import (
     SignupSerializer,
     UserSerializer,
     StudySerializer,
     Datalistserializer,
+    SubjectSerializer
     
 )
-
+from rest_framework.decorators import api_view, authentication_classes, permission_classes
 from users.models import StudyId,Datalist
 class SignupViewSet(ModelViewSet):
     serializer_class = SignupSerializer
@@ -144,3 +147,39 @@ class AdminLoginViewSet(ViewSet):
         token, created = Token.objects.get_or_create(user=user)
         user_serializer = UserSerializer(user)
         return Response({"token": token.key, "user": user_serializer.data})
+
+class IsSuperUser(IsAdminUser):
+    def has_permission(self, request, view):
+        return bool(request.user and request.user.is_superuser)
+
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated,IsSuperUser])
+
+class AdminStudyViewSet(ModelViewSet):
+    serializer_class = StudySerializer
+    http_method_names = ["post",]
+    #queryset = StudyId.objects.all()
+
+    def post(self, request, format=None):
+            serializer = StudySerializer(data=request.data)
+            if serializer.is_valid():
+                serializer.save()
+                return Response(serializer.data, status=status.HTTP_201_CREATED)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)    
+
+
+
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated,IsSuperUser])
+
+class AdminSubjectViewSet(ModelViewSet):
+    serializer_class = SubjectSerializer
+    http_method_names = ["post",]
+    #queryset = StudyId.objects.all()
+
+    def post(self, request, format=None):
+            serializer = SubjectSerializer(data=request.data)
+            if serializer.is_valid():
+                serializer.save()
+                return Response(serializer.data, status=status.HTTP_201_CREATED)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)                 
