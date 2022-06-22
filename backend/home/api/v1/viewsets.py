@@ -17,6 +17,8 @@ from home.api.v1.serializers import (
 )
 from rest_framework.decorators import api_view, authentication_classes, permission_classes
 from users.models import StudyId,Datalist
+from django.db.models import Count
+
 class SignupViewSet(ModelViewSet):
     serializer_class = SignupSerializer
     http_method_names = ["post"]
@@ -182,4 +184,80 @@ class AdminSubjectViewSet(ModelViewSet):
             if serializer.is_valid():
                 serializer.save()
                 return Response(serializer.data, status=status.HTTP_201_CREATED)
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)                 
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST) 
+
+
+
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated,IsSuperUser])
+class AdminDataListView(ModelViewSet):
+    """
+    List all snippets, or create a new snippet.
+    """
+    serializer_class = Datalistserializer
+    http_method_names = ["get"]
+    queryset = Datalist.objects.all()
+
+
+
+    def retrieve(self, request, *args, **kwargs):
+        # ret = super(StoryViewSet, self).retrieve(request)
+        datalist = list(Datalist.objects.all())
+        
+        dlist = Datalist.objects.order_by().values('study_id','subject_id','first_timestamp').annotate(Count('subject_id')).distinct()
+        
+        clist = list(dlist)
+        print(clist)
+        resultant_data = {}
+        for data in clist:
+            resultant_data['study_id'] = data['study_id']
+            resultant_data['subject_id'] = data['subject_id']
+            resultant_data['test'] = data['subject_id']
+           
+            
+        
+        return Response(data)
+
+
+    def list(self, request, *args, **kwargs):
+        # ret = super(StoryViewSet, self).list(request)
+        datalist = list(Datalist.objects.all())
+        
+        dlist = Datalist.objects.order_by().values('study_id','subject_id','first_timestamp','last_timestamp').annotate(Count('subject_id')).distinct().all()
+        
+        
+        resultant_data = {}
+        clist = list(dlist)
+        for data in clist:
+            print(data['first_timestamp'])
+
+            
+             
+            _first_timestamp = data['first_timestamp']
+            _last_timestamp = data['last_timestamp']
+
+
+            try:
+                # when timestamp is in seconds
+                converted_first_timestamp = datetime.datetime.fromtimestamp(int(_first_timestamp))
+                converted_last_timestamp = datetime.datetime.fromtimestamp(int(_last_timestamp))
+            except (ValueError):
+                # when timestamp is in miliseconds
+                converted_first_timestamp = datetime.datetime.fromtimestamp(int(_first_timestamp) / 1000)
+                converted_last_timestamp = datetime.datetime.fromtimestamp(int(_last_timestamp)/1000)
+            #converted_first_timestamp = datetime.datetime.fromtimestamp(int(_first_timestamp))
+            # converted_last_timestamp = datetime.datetime.fromtimestamp(int(_last_timestamp))
+            data_start = converted_first_timestamp.strftime('%H:%M %p')
+            data_end = converted_last_timestamp.strftime('%H:%M %p')
+
+            date_start = converted_first_timestamp.strftime('%m/%d/%Y')
+            date_end = converted_last_timestamp.strftime('%m/%d/%Y')
+
+            data['first_timestamp'] =  data_start
+            data['last_timestamp'] = data_end
+
+            data['date_start'] = date_start
+            data['date_end'] = date_end
+            
+        
+        return Response(dlist) 
