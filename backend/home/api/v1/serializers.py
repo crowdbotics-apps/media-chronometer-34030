@@ -9,7 +9,7 @@ from allauth.account.utils import setup_user_email
 from rest_framework import serializers
 from rest_auth.serializers import PasswordResetSerializer
 
-from users.models import StudyId,Datalist
+from users.models import StudyId,Datalist,SubjectID
 
 
 User = get_user_model()
@@ -92,6 +92,12 @@ class Datalistserializer(serializers.ModelSerializer):
     class Meta:
         model = Datalist
         fields = '__all__'   
+
+
+class SubjectSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SubjectID
+        fields = '__all__'         
 
          
 

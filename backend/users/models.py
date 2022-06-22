@@ -62,3 +62,12 @@ class Datalist(models.Model):
     def __str__(self):
         return str(self.content_title)
         
+
+
+#For Subject ID
+class SubjectID(models.Model):
+    subject_id = models.CharField(
+        _("Subject ID"), blank=True, null=True, max_length=255)
+
+    def __str__(self):
+        return self.subject_id        
