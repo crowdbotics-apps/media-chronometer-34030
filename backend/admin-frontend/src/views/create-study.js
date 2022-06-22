@@ -2,12 +2,33 @@ import React from "react"
 import { useState } from "react"
 
 import { Helmet } from "react-helmet"
+import { basic_api, main_api } from "../api/axios_helper"
 
 import "./create-study.css"
 
 const CreateStudy1111677 = props => {
+  const [isLoading, setIsloading] = useState(false)
   const [isSubject, setIsSubject] = useState(false)
   const [subjects, setSubjects] = useState([])
+  const [study, setStudy] = useState("")
+
+  const onSaveStudy = () => {
+    setIsloading(true)
+    const payload = {
+      study_id: study
+    }
+    main_api
+      .post("/api/v1/admin_study_id/", payload)
+      .then(({ data }) => {
+        setIsloading(false)
+        setStudy("")
+      })
+      .catch(error => {
+        console.log(error.response.data)
+        setIsloading(false)
+        // setDisableFields(false);
+      })
+  }
   return (
     <div className="create-study1111677-container">
       <Helmet>
@@ -32,6 +53,8 @@ const CreateStudy1111677 = props => {
               <input
                 className="create-study1111677-text5"
                 placeholder="Study ID Input Area"
+                value={study}
+                onChange={event => setStudy(event.target.value)}
               />
             </div>
           </div>
@@ -53,7 +76,10 @@ const CreateStudy1111677 = props => {
             <span className="create-study1111677-text6">Add Subject IDs</span>
           </div>
           <div className="create-study1111677-frame2221111867">
-            <div className="create-study1111677-frame2191111864">
+            <div
+              className="create-study1111677-frame2191111864"
+              onClick={onSaveStudy}
+            >
               <span className="create-study1111677-text7">Submit</span>
             </div>
           </div>

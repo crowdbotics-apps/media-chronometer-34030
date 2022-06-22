@@ -20,7 +20,7 @@ main_api.interceptors.request.use(
   config => {
     const jwt_token = getJWTToken()
     if (jwt_token) {
-      config.headers.Authorization = `JWT ${jwt_token}`
+      config.headers.Authorization = `Token ${jwt_token}`
     } else {
       delete config.headers.Authorization
     }
