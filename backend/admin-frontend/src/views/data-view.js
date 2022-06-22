@@ -1,6 +1,5 @@
 import React from "react"
-import { useState } from "react"
-import { useEffect } from "react"
+import { useState, useEffect } from "react"
 
 import { Helmet } from "react-helmet"
 import { basic_api } from "../api/axios_helper"
@@ -26,7 +25,6 @@ const DataView110763 = props => {
         setIsloading(false)
         // setDisableFields(false);
       })
-      .then(() => {})
   }
   return (
     <div className="data-view110763-container">
