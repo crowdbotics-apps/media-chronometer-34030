@@ -2,7 +2,7 @@ import React from "react"
 import { useState, useEffect } from "react"
 
 import { Helmet } from "react-helmet"
-import { basic_api } from "../api/axios_helper"
+import { main_api } from "../api/axios_helper"
 
 import "./data-view.css"
 
@@ -14,8 +14,8 @@ const DataView110763 = props => {
   }, [])
   const getDataList = () => {
     setIsloading(true)
-    basic_api
-      .get("/api/v1/datalist/")
+    main_api
+      .get("/api/v1/admin_datalist/")
       .then(({ data }) => {
         setIsloading(false)
         setDataList(data)
@@ -85,7 +85,9 @@ const DataView110763 = props => {
                 />
               </div>
               <div className="data-view110763-frame197110789">
-                <span className="data-view110763-text010">8113</span>
+                <span className="data-view110763-text010">
+                  {data.date_start}
+                </span>
               </div>
               <div className="data-view110763-frame198110791">
                 <span className="data-view110763-text011">
@@ -93,7 +95,7 @@ const DataView110763 = props => {
                 </span>
               </div>
               <div className="data-view110763-frame199110793">
-                <span className="data-view110763-text012">8113</span>
+                <span className="data-view110763-text012">{data.date_end}</span>
               </div>
               <div className="data-view110763-frame200110795">
                 <span className="data-view110763-text013">
