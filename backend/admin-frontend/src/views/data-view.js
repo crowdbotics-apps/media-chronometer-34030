@@ -3,6 +3,7 @@ import { useState, useEffect } from "react"
 
 import { Helmet } from "react-helmet"
 import { main_api } from "../api/axios_helper"
+import { CSVLink } from "react-csv"
 
 import "./data-view.css"
 
@@ -181,9 +182,17 @@ const DataView110763 = props => {
           alt="Rectangle151101139"
           className="data-view110763-image24"
         />
-        <div className="data-view110763-frame2191111178">
-          <span className="data-view110763-text151">Export as CSV</span>
-        </div>
+        <CSVLink
+          data={dataList}
+          filename={"log-datalist.csv"}
+          className="btn btn-primary"
+          target="_blank"
+        >
+          <div className="data-view110763-frame2191111178">
+            <span className="data-view110763-text151">Export as CSV</span>
+          </div>
+        </CSVLink>
+        ;
       </div>
     </div>
   )
