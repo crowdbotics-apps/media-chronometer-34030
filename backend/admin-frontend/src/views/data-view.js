@@ -16,7 +16,7 @@ const DataView110763 = props => {
   const getDataList = () => {
     setIsloading(true)
     main_api
-      .get("/api/v1/admin_datalist/")
+      .get("/api/v1/datalist/")
       .then(({ data }) => {
         setIsloading(false)
         setDataList(data)
