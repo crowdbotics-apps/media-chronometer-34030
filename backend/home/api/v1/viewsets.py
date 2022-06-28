@@ -7,6 +7,8 @@ from rest_framework import viewsets, status
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework.authentication import TokenAuthentication
 from django.http import HttpResponse, JsonResponse
+import csv
+
 from home.api.v1.serializers import (
     SignupSerializer,
     UserSerializer,
@@ -261,3 +263,38 @@ class AdminDataListView(ModelViewSet):
             
         
         return Response(dlist) 
+
+
+
+
+
+
+from rest_framework import generics
+#Show List as a category
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated,IsSuperUser])
+class AdminCategoryDataListView(ModelViewSet):
+    serializer_class = Datalistserializer
+    http_method_names = ["get"]
+    #queryset = Datalist.objects.all()
+
+    def get_queryset(self):
+        """
+        Optionally restricts the returned purchases to a given user,
+        by filtering against a `username` query parameter in the URL.
+        """
+        queryset = Datalist.objects.all()
+        _content_title = self.request.query_params.get('content_title')
+        _subject_id = self.request.query_params.get('subject_id')
+        _study_id = self.request.query_params.get('study_id')
+        if _study_id is not None:
+            queryset = queryset.filter(study_id=_study_id).all()
+        elif _subject_id is not None:
+            queryset = queryset.filter(subject_id=_subject_id).all()
+
+        elif _content_title is not None:
+            queryset = queryset.filter(content_title=_content_title).all()
+        else:
+            queryset = queryset
+
+        return queryset
