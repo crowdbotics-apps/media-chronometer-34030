@@ -19,8 +19,6 @@ from home.api.v1.serializers import (
 )
 from rest_framework.decorators import api_view, authentication_classes, permission_classes
 from users.models import StudyId,Datalist
-from django.db.models import Count
-
 class SignupViewSet(ModelViewSet):
     serializer_class = SignupSerializer
     http_method_names = ["post"]
@@ -186,6 +184,7 @@ class AdminSubjectViewSet(ModelViewSet):
             if serializer.is_valid():
                 serializer.save()
                 return Response(serializer.data, status=status.HTTP_201_CREATED)
+
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST) 
 
 
@@ -298,3 +297,4 @@ class AdminCategoryDataListView(ModelViewSet):
             queryset = queryset
 
         return queryset
+
