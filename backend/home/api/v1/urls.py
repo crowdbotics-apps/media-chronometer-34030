@@ -12,7 +12,9 @@ from home.api.v1.viewsets import (
     AdminDataListView,
     #Add CSV
     AdminCategoryDataListView,
-   
+    AscendingAdminDataListView,
+    ContentListAdminView,
+
     
 )
 
@@ -27,6 +29,8 @@ router.register("admin_subject_id", AdminSubjectViewSet, basename="admin_subject
 router.register("admin_datalist", AdminDataListView, basename="admin_datalist")
 #router.register("csvdatalist", ExportCSVStudents, basename="csv_datalist")
 router.register("admin_category_datalist", AdminCategoryDataListView, basename="admin_category_datalist")
+router.register("ascending_order_datalist", AscendingAdminDataListView, basename="admin_categorascending_order_datalisty_datalist")
+router.register("admin_contentlist_category", ContentListAdminView, basename="admin_contentlist_category")
 
 
 

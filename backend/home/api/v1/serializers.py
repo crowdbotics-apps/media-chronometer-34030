@@ -97,7 +97,16 @@ class Datalistserializer(serializers.ModelSerializer):
 class SubjectSerializer(serializers.ModelSerializer):
     class Meta:
         model = SubjectID
-        fields = '__all__'         
+        fields = '__all__'       
+
+
+
+class CategoryDatalistserializer(serializers.ModelSerializer):
+
+
+    class Meta:
+        model = Datalist
+        fields = ('content_title',)             
 
          
 

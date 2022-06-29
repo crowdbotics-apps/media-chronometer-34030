@@ -14,7 +14,8 @@ from home.api.v1.serializers import (
     UserSerializer,
     StudySerializer,
     Datalistserializer,
-    SubjectSerializer
+    SubjectSerializer,
+    CategoryDatalistserializer,
     
 )
 from rest_framework.decorators import api_view, authentication_classes, permission_classes
@@ -269,7 +270,7 @@ class AdminDataListView(ModelViewSet):
 
 
 
-from rest_framework import generics
+
 #Show List as a category
 @authentication_classes([TokenAuthentication])
 @permission_classes([IsAuthenticated,IsSuperUser])
@@ -298,3 +299,69 @@ class AdminCategoryDataListView(ModelViewSet):
             queryset = queryset
 
         return queryset
+
+
+
+#Show List as desending order
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated,IsSuperUser])
+class AscendingAdminDataListView(ModelViewSet):
+    serializer_class = Datalistserializer
+    http_method_names = ["get"]
+    #queryset = Datalist.objects.all()
+
+    def get_queryset(self):
+        """
+        Optionally restricts the returned by ascending order.
+        """
+        
+        desc = self.request.query_params.get('desc')
+        if desc:
+            queryset = Datalist.objects.all().order_by('-id')   
+        else:
+            queryset = Datalist.objects.all()
+        return queryset  
+
+
+#Show List as desending order
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated,IsSuperUser])
+class AscendingAdminDataListView(ModelViewSet):
+    serializer_class = Datalistserializer
+    http_method_names = ["get"]
+    #queryset = Datalist.objects.all()
+
+    def get_queryset(self):
+        """
+        Optionally restricts the returned by ascending order.
+        """
+        
+        desc = self.request.query_params.get('desc')
+        if desc:
+            queryset = Datalist.objects.all().order_by('-id')   
+        else:
+            queryset = Datalist.objects.all()
+        return queryset 
+        
+
+
+#All Categories(Content Title) List for 
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated,IsSuperUser])
+class ContentListAdminView(ModelViewSet):
+    serializer_class = CategoryDatalistserializer
+    http_method_names = ["get"]
+    #queryset = Datalist.objects.all()
+
+    def get_queryset(self):
+        """
+        Optionally restricts the returned by ascending order.
+        """
+        
+        content_categories = Datalist.objects.values('content_title').distinct()
+        
+        # content_holder = {}
+        # for content in content_categories:
+        #     content_holder['content_title'] = content['content_title']
+
+        return content_categories         
