@@ -8,13 +8,16 @@ from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework.authentication import TokenAuthentication
 from django.http import HttpResponse, JsonResponse
 import csv
+from django.db.models import Q
+
 
 from home.api.v1.serializers import (
     SignupSerializer,
     UserSerializer,
     StudySerializer,
     Datalistserializer,
-    SubjectSerializer
+    SubjectSerializer,
+    CategoryDatalistserializer,
     
 )
 from rest_framework.decorators import api_view, authentication_classes, permission_classes
@@ -268,7 +271,7 @@ class AdminDataListView(ModelViewSet):
 
 
 
-from rest_framework import generics
+
 #Show List as a category
 @authentication_classes([TokenAuthentication])
 @permission_classes([IsAuthenticated,IsSuperUser])
@@ -298,3 +301,84 @@ class AdminCategoryDataListView(ModelViewSet):
 
         return queryset
 
+
+
+
+
+
+#Show List as desending order
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated,IsSuperUser])
+class AscendingAdminDataListView(ModelViewSet):
+    serializer_class = Datalistserializer
+    http_method_names = ["get"]
+    #queryset = Datalist.objects.all()
+
+    def get_queryset(self):
+        """
+        Optionally restricts the returned by ascending order.
+        """
+        categoryTitle = self.request.query_params.get('category')
+        print(categoryTitle)
+        desc = self.request.query_params.get('desc')
+        if desc:
+            queryset = Datalist.objects.filter(content_title=categoryTitle).order_by('-id')   
+        else:
+            queryset = Datalist.objects.filter(content_title=categoryTitle)
+        return queryset 
+        
+
+
+#All Categories(Content Title) List for Admin
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated,IsSuperUser])
+class ContentListAdminView(ModelViewSet):
+    serializer_class = CategoryDatalistserializer
+    http_method_names = ["get"]
+    #queryset = Datalist.objects.all()
+
+    def get_queryset(self):
+        """
+        Optionally restricts the returned by ascending order.
+        """
+        
+        content_categories = Datalist.objects.values('content_title').distinct()
+        
+        # content_holder = {}
+        # for content in content_categories:
+        #     content_holder['content_title'] = content['content_title']
+
+        return content_categories         
+
+
+#Search By Study Id or Subject Id
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated,IsSuperUser])
+class SearchBySubjectIdStudyIdView(ModelViewSet):
+    serializer_class = Datalistserializer
+    http_method_names = ["get"]
+    #queryset = Datalist.objects.all()
+
+    def get_queryset(self):
+        """
+        Optionally restricts the returned by ascending order.
+        """
+        searchQuery = self.request.query_params.get('q')
+        # studyId = self.request.query_params.get('study_id')
+        # subjectId = self.request.query_params.get('subject_id')
+        
+        # if studyId is not None:
+        #    queryset = Datalist.objects.filter(Q(study_id=studyId)).order_by('-id')  
+        # elif subjectId is not None:
+        #    queryset = Datalist.objects.filter(Q(subject_id=subjectId)).order_by('-id')  
+        # else:
+        #     queryset = Datalist.objects.all().order_by('-id')   
+        #print(queryset.query)
+
+        if searchQuery:
+           queryset = Datalist.objects.filter(Q(subject_id=searchQuery)| Q(study_id=searchQuery)).order_by('-id')  
+
+        else:
+            queryset = Datalist.objects.all().order_by('-id') 
+
+        return queryset         

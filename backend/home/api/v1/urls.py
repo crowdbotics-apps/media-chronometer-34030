@@ -13,7 +13,10 @@ from home.api.v1.viewsets import (
     AdminDataListView,
     #Add CSV
     AdminCategoryDataListView,
-   
+    AscendingAdminDataListView,
+    ContentListAdminView,
+    SearchBySubjectIdStudyIdView,
+
     
 
 )
@@ -30,7 +33,9 @@ router.register("admin_subject_id", AdminSubjectViewSet, basename="admin_subject
 router.register("admin_datalist", AdminDataListView, basename="admin_datalist")
 #router.register("csvdatalist", ExportCSVStudents, basename="csv_datalist")
 router.register("admin_category_datalist", AdminCategoryDataListView, basename="admin_category_datalist")
-
+router.register("category_with_asc_or_desc", AscendingAdminDataListView, basename="category_with_asc_or_desc")
+router.register("admin_contentlist_category", ContentListAdminView, basename="admin_contentlist_category")
+router.register("search_by", SearchBySubjectIdStudyIdView, basename="search_by")
 
 
 urlpatterns = [
