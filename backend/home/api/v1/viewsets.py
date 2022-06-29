@@ -22,8 +22,6 @@ from home.api.v1.serializers import (
 )
 from rest_framework.decorators import api_view, authentication_classes, permission_classes
 from users.models import StudyId,Datalist
-from django.db.models import Count
-
 class SignupViewSet(ModelViewSet):
     serializer_class = SignupSerializer
     http_method_names = ["post"]
@@ -189,6 +187,7 @@ class AdminSubjectViewSet(ModelViewSet):
             if serializer.is_valid():
                 serializer.save()
                 return Response(serializer.data, status=status.HTTP_201_CREATED)
+
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST) 
 
 
@@ -364,15 +363,22 @@ class SearchBySubjectIdStudyIdView(ModelViewSet):
         """
         Optionally restricts the returned by ascending order.
         """
-        studyId = self.request.query_params.get('study_id')
-        if studyId is not None:
-           queryset = Datalist.objects.filter(Q(study_id=studyId)).order_by('-id')  
-
-        subjectId = self.request.query_params.get('subject_id')
-
-        if subjectId is not None:
-           queryset = Datalist.objects.filter(Q(subject_id=subjectId)).order_by('-id')  
-        #queryset = Datalist.objects.filter(Q(study_id=studyId) | Q(subject_id=subjectId)).order_by('-id')   
-        #print(queryset.query)
+        searchQuery = self.request.query_params.get('q')
+        # studyId = self.request.query_params.get('study_id')
+        # subjectId = self.request.query_params.get('subject_id')
         
+        # if studyId is not None:
+        #    queryset = Datalist.objects.filter(Q(study_id=studyId)).order_by('-id')  
+        # elif subjectId is not None:
+        #    queryset = Datalist.objects.filter(Q(subject_id=subjectId)).order_by('-id')  
+        # else:
+        #     queryset = Datalist.objects.all().order_by('-id')   
+        #print(queryset.query)
+
+        if searchQuery:
+           queryset = Datalist.objects.filter(Q(subject_id=searchQuery)| Q(study_id=searchQuery)).order_by('-id')  
+
+        else:
+            queryset = Datalist.objects.all().order_by('-id') 
+
         return queryset         
