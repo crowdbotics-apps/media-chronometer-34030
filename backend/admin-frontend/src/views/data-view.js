@@ -4,22 +4,29 @@ import { useState, useEffect } from "react"
 import { Helmet } from "react-helmet"
 import { main_api } from "../api/axios_helper"
 import { CSVLink } from "react-csv"
+import moment from "moment"
 
 import "./data-view.css"
 
 const DataView110763 = props => {
   const [isLoading, setIsloading] = useState(false)
   const [dataList, setDataList] = useState([])
+  const [categories, setCategories] = useState([])
+  const [selectedFilter, setSelecedFilter] = useState(null)
+
+  const [search, setSearch] = useState("")
+
   useEffect(() => {
-    getDataList()
+    // getDataList()
+    getCategories()
   }, [])
-  const getDataList = () => {
+  const getCategories = () => {
     setIsloading(true)
     main_api
-      .get("/api/v1/datalist/")
+      .get("/api/v1/admin_contentlist_category/")
       .then(({ data }) => {
         setIsloading(false)
-        setDataList(data)
+        setCategories(data)
       })
       .catch(error => {
         console.log(error.response.data)
@@ -27,6 +34,37 @@ const DataView110763 = props => {
         // setDisableFields(false);
       })
   }
+
+  useEffect(() => {
+    if (selectedFilter) {
+      const getFilterResult = () => {
+        main_api
+          .get(`/api/v1/category_with_asc_or_desc/?category=${selectedFilter}`)
+          .then(({ data }) => {
+            setDataList(data)
+          })
+          .catch(error => {})
+      }
+      getFilterResult()
+    } else {
+      const getDataList = () => {
+        setIsloading(true)
+        main_api
+          .get(`/api/v1/search_by/?q=${search}`)
+          .then(({ data }) => {
+            setIsloading(false)
+            data.length > 0 && setDataList(data)
+          })
+          .catch(error => {
+            console.log(error.response.data)
+            setIsloading(false)
+            // setDisableFields(false);
+          })
+      }
+      getDataList()
+    }
+  }, [selectedFilter, search])
+
   return (
     <div className="data-view110763-container">
       <Helmet>
@@ -87,20 +125,30 @@ const DataView110763 = props => {
               </div>
               <div className="data-view110763-frame197110789">
                 <span className="data-view110763-text010">
-                  {data.date_start}
+                  {moment
+                    .unix(parseInt(data.first_timestamp) / 1000)
+                    .format("DD/MM/YYYY")}
                 </span>
               </div>
               <div className="data-view110763-frame198110791">
                 <span className="data-view110763-text011">
-                  {data.first_timestamp}
+                  {moment
+                    .unix(parseInt(data.first_timestamp) / 1000)
+                    .format("LT")}
                 </span>
               </div>
               <div className="data-view110763-frame199110793">
-                <span className="data-view110763-text012">{data.date_end}</span>
+                <span className="data-view110763-text012">
+                  {moment
+                    .unix(parseInt(data.last_timestamp) / 1000)
+                    .format("DD/MM/YYYY")}
+                </span>
               </div>
               <div className="data-view110763-frame200110795">
                 <span className="data-view110763-text013">
-                  {data.last_timestamp}
+                  {moment
+                    .unix(parseInt(data.last_timestamp) / 1000)
+                    .format("LT")}
                 </span>
               </div>
               <div className="data-view110763-frame200110797">
@@ -121,6 +169,8 @@ const DataView110763 = props => {
           <input
             className="data-view110763-text139"
             placeholder="Search by Subject ID or Study ID"
+            value={search}
+            onChange={e => setSearch(e.target.value)}
           />
           <div className="data-view110763-group191101103">
             <img
@@ -153,29 +203,42 @@ const DataView110763 = props => {
           <span className="data-view110763-text143">Filter By:</span>
           <div className="data-view110763-group221101117">
             <div className="data-view110763-group211101119">
-              <select className="data-view110763-text144" name="filter">
+              <select
+                className="data-view110763-text144"
+                name="filter"
+                value="categories"
+                onChange={e =>
+                  e.target.value != "categories" &&
+                  setSelecedFilter(e.target.value)
+                }
+              >
                 <option value="categories">Categories</option>
+                {categories.map((category, i) => (
+                  <option value={category.content_title}>
+                    {category.content_title}
+                  </option>
+                ))}
               </select>
             </div>
           </div>
         </div>
         <div className="data-view110763-frame1911101122">
-          <div className="data-view110763-group241101123">
-            <span className="data-view110763-text145">Category 01</span>
-          </div>
-          <div className="data-view110763-group251101126">
-            <span className="data-view110763-text146">Category 01</span>
-          </div>
-          <div className="data-view110763-group261101129">
-            <span className="data-view110763-text147">Category 01</span>
-          </div>
-          <div className="data-view110763-group271101132">
-            <span className="data-view110763-text148">Category 01</span>
-          </div>
-          <div className="data-view110763-group281101135">
-            <span className="data-view110763-text149">Category 01</span>
-          </div>
-          <span className="data-view110763-text150">Clear Filters</span>
+          {selectedFilter && (
+            <>
+              <div className="data-view110763-group241101123">
+                <span className="data-view110763-text145">
+                  {selectedFilter}
+                </span>
+              </div>
+              <span
+                className="data-view110763-text150"
+                style={{ cursor: "pointer" }}
+                onClick={() => setSelecedFilter(null)}
+              >
+                Clear Filters
+              </span>
+            </>
+          )}
         </div>
         <img
           src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0nNzkzJyBoZWlnaHQ9JzEnIHZpZXdCb3g9JzAgMCA3OTMgMScgZmlsbD0nbm9uZScgeG1sbnM9J2h0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnJz4KPHJlY3Qgd2lkdGg9Jzc5MycgaGVpZ2h0PScxJyBmaWxsPScjRDlEOUQ5Jy8+Cjwvc3ZnPgo="
@@ -192,7 +255,6 @@ const DataView110763 = props => {
             <span className="data-view110763-text151">Export as CSV</span>
           </div>
         </CSVLink>
-        ;
       </div>
     </div>
   )
