@@ -10,7 +10,8 @@ import {
   ImageBackground,
   Pressable,
   NativeModules,
-  Platform
+  Platform,
+  ToastAndroid
 } from "react-native"
 import { styles } from "./styles"
 import { InputField } from "../../components/InputField/inputField.component"
@@ -27,6 +28,49 @@ import getProfileData from "../../apis/profile"
 import { CustomText } from "../../components/CustomText"
 import navigationService from "../../navigation/navigation-service"
 import { CustomImage } from "../../components/CustomImage"
+import BackgroundJob from "react-native-background-job"
+import BackgroundTask from "react-native-background-task"
+
+const backgroundJob = {
+  jobKey: "myJob",
+  job: async () => {
+    const submitStat = data1 => {
+      Persistence.getUserProfileData().then(data2 => {
+        if (data2?.study_id) {
+          data1.map(data => {
+            const payload = {
+              study_id: data2.study_id,
+              subject_id: data2.subject_id,
+              first_timestamp: data.first_timestamp,
+              last_timestamp: data.last_timestamp,
+              content_title: data.name
+            }
+            const onSuccess = async ({ data }) => {
+              console.log("success background", data)
+            }
+
+            const onFailure = error => {
+              console.log("error background", error.response.data)
+            }
+
+            APIKit.post("/api/v1/datalist/", payload)
+              .then(onSuccess)
+              .catch(onFailure)
+          })
+        }
+      })
+    }
+    if (Platform.OS == "android") {
+      if (NativeModules.UsageStat.init()) {
+        NativeModules.UsageStat.loadStatistics()
+          .then(submitStat)
+          .catch(r => console.error("error", r))
+      }
+    }
+  }
+}
+
+BackgroundJob.register(backgroundJob)
 
 const SettingsScreen = ({ route }) => {
   const [remember, setRemember] = useState(false)
@@ -53,43 +97,51 @@ const SettingsScreen = ({ route }) => {
         NativeModules.RNUsage.open()
       }
     }
-    fetchData()
+    // fetchData()
+
+    var backgroundSchedule = {
+      jobKey: "myJob"
+    }
+
+    BackgroundJob.schedule(backgroundSchedule)
+      .then(() => console.log("Success"))
+      .catch(err => console.err(err))
   }, [])
 
-  const submitStat = data => {
-    data.map(data => {
-      const payload = {
-        study_id: user.study_id,
-        subject_id: user.subject_id,
-        first_timestamp: data.first_timestamp,
-        last_timestamp: data.last_timestamp,
-        content_title: data.name
-      }
-      const onSuccess = async ({ data }) => {
-        setIsLoading(false)
-        console.log(data)
-      }
+  // const submitStat = data => {
+  //   data.map(data => {
+  //     const payload = {
+  //       study_id: user.study_id,
+  //       subject_id: user.subject_id,
+  //       first_timestamp: data.first_timestamp,
+  //       last_timestamp: data.last_timestamp,
+  //       content_title: data.name
+  //     }
+  //     const onSuccess = async ({ data }) => {
+  //       setIsLoading(false)
+  //       console.log(data)
+  //     }
 
-      const onFailure = error => {
-        setIsLoading(false)
-        console.log(error.response.data)
-        error = error.response.data
-        error = error[Object.keys(error)[0]]
-        Alert.alert("Error", error[0])
-      }
+  //     const onFailure = error => {
+  //       setIsLoading(false)
+  //       console.log(error.response.data)
+  //       error = error.response.data
+  //       error = error[Object.keys(error)[0]]
+  //       Alert.alert("Error", error[0])
+  //     }
 
-      // Show spinner when call is made
-      setIsLoading(true)
+  //     // Show spinner when call is made
+  //     setIsLoading(true)
 
-      APIKit.post("/api/v1/datalist/", payload).then(onSuccess).catch(onFailure)
-    })
-  }
+  //     APIKit.post("/api/v1/datalist/", payload).then(onSuccess).catch(onFailure)
+  //   })
+  // }
 
   useEffect(() => {
     getSudyIds()
   }, [])
 
-  getSudyIds = () => {
+  const getSudyIds = () => {
     const onSuccess = async ({ data }) => {
       setIsLoading(false)
       console.log(data)
