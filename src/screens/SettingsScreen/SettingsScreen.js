@@ -100,7 +100,8 @@ const SettingsScreen = ({ route }) => {
     // fetchData()
 
     var backgroundSchedule = {
-      jobKey: "myJob"
+      jobKey: "myJob",
+      period: 3600000
     }
 
     BackgroundJob.schedule(backgroundSchedule)
