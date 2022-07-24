@@ -84,7 +84,7 @@ public class UsageStat extends ReactContextBaseJavaModule {
         Context context = getReactApplicationContext();
         UsageStatsManager usm = (UsageStatsManager) context.getSystemService(context.USAGE_STATS_SERVICE);
         List<UsageStats> appList = usm.queryUsageStats(UsageStatsManager.INTERVAL_DAILY,
-                System.currentTimeMillis() - 1000 * 3600 * 1, System.currentTimeMillis());
+                System.currentTimeMillis() - 1000 * 3600 * 24, System.currentTimeMillis());
         appList = appList.stream().filter(app -> app.getTotalTimeInForeground() > 0).collect(Collectors.toList());
 
         // Group the usageStats by application and sort them by total time in foreground
@@ -95,6 +95,9 @@ public class UsageStat extends ReactContextBaseJavaModule {
 
                     WritableMap info = new WritableNativeMap();
 
+                    PackageManager pm = context.getPackageManager();
+                    ApplicationInfo ai = pm.getApplicationInfo(usageStats.getPackageName(),0);
+
                     String[] packageNames = usageStats.getPackageName().split("\\.");
                     String appName = packageNames[packageNames.length - 1].trim();
 
@@ -102,6 +105,10 @@ public class UsageStat extends ReactContextBaseJavaModule {
                     info.putString("package_id", usageStats.getPackageName());
                     info.putString("first_timestamp", String.valueOf(usageStats.getFirstTimeStamp()));
                     info.putString("last_timestamp", String.valueOf(usageStats.getLastTimeStamp()));
+
+                    if((ai.flags & ApplicationInfo.FLAG_IS_GAME) == ApplicationInfo.FLAG_IS_GAME){
+                        info.putString("is_game", String.valueOf(true));
+                    }
 
                     // ...
 

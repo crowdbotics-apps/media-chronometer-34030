@@ -70,7 +70,7 @@ const backgroundJob = {
   }
 }
 
-BackgroundJob.register(backgroundJob)
+// BackgroundJob.register(backgroundJob)
 
 const SettingsScreen = ({ route }) => {
   const [remember, setRemember] = useState(false)
@@ -89,24 +89,25 @@ const SettingsScreen = ({ route }) => {
     async function fetchData() {
       if (Platform.OS == "android") {
         if (NativeModules.UsageStat.init()) {
+          console.log("asas")
           NativeModules.UsageStat.loadStatistics()
-            .then(submitStat)
+            .then((d)=>console.log("sasas"))
             .catch(r => console.error("error", r))
         }
       } else if (Platform.OS == "ios") {
         NativeModules.RNUsage.open()
       }
     }
-    // fetchData()
+    fetchData()
 
     var backgroundSchedule = {
       jobKey: "myJob",
       period: 3600000
     }
 
-    BackgroundJob.schedule(backgroundSchedule)
-      .then(() => console.log("Success"))
-      .catch(err => console.err(err))
+    // BackgroundJob.schedule(backgroundSchedule)
+    //   .then(() => console.log("Success"))
+    //   .catch(err => console.err(err))
   }, [])
 
   // const submitStat = data => {
