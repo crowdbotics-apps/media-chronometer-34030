@@ -84,7 +84,7 @@ public class UsageStat extends ReactContextBaseJavaModule {
         Context context = getReactApplicationContext();
         UsageStatsManager usm = (UsageStatsManager) context.getSystemService(context.USAGE_STATS_SERVICE);
         List<UsageStats> appList = usm.queryUsageStats(UsageStatsManager.INTERVAL_DAILY,
-                System.currentTimeMillis() - 1000 * 3600 * 24, System.currentTimeMillis());
+                System.currentTimeMillis() - 1000 * 3600 * 1, System.currentTimeMillis());
         appList = appList.stream().filter(app -> app.getTotalTimeInForeground() > 0).collect(Collectors.toList());
 
         // Group the usageStats by application and sort them by total time in foreground
