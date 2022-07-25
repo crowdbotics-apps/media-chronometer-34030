@@ -57,7 +57,9 @@ class Datalist(models.Model):
 
 
     content_title = models.CharField(
-        _("Content Title"), blank=True, null=True, max_length=255)           
+        _("Content Title"), blank=True, null=True, max_length=255)  
+
+    is_game  =models.BooleanField(default=False)             
 
     def __str__(self):
         return str(self.content_title)
