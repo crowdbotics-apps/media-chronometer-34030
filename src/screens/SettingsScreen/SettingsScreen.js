@@ -91,23 +91,25 @@ const SettingsScreen = ({ route }) => {
       if (Platform.OS == "android") {
         if (NativeModules.UsageStat.init()) {
           NativeModules.UsageStat.loadStatistics()
-            .then(d => submitStat)
+            .then(d => console.log("sasasa", d))
             .catch(r => console.error("error", r))
         }
       } else if (Platform.OS == "ios") {
         NativeModules.RNUsage.open()
       }
     }
-    // fetchData()
-
+    fetchData()
     var backgroundSchedule = {
       jobKey: "myJob",
       period: 3600000
     }
 
-    BackgroundJob.schedule(backgroundSchedule)
-      .then(() => console.log("Success"))
-      .catch(err => console.err(err))
+    if (Platform.OS == "ios") {
+    } else {
+      BackgroundJob.schedule(backgroundSchedule)
+        .then(() => console.log("Success"))
+        .catch(err => console.err(err))
+    }
   }, [])
 
   // const submitStat = data => {

@@ -6,6 +6,8 @@ import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import java.util.HashMap;
+
+import android.app.usage.UsageEvents;
 import android.util.Log;
 import android.app.AppOpsManager;
 import android.app.usage.UsageStats;
@@ -82,13 +84,34 @@ public class UsageStat extends ReactContextBaseJavaModule {
     @ReactMethod
     public void loadStatistics(Promise promise) {
         Context context = getReactApplicationContext();
+
         UsageStatsManager usm = (UsageStatsManager) context.getSystemService(context.USAGE_STATS_SERVICE);
+
+        UsageEvents usageEvents = usm.queryEvents(System.currentTimeMillis() - 1000 * 3600, System.currentTimeMillis());
+
+        UsageEvents.Event currentEvent;
+        while (usageEvents.hasNextEvent()) {
+            System.out.println("Here! 4 ");
+            currentEvent = new UsageEvents.Event();
+            usageEvents.getNextEvent(currentEvent);
+            if (currentEvent.getEventType() == UsageEvents.Event.ACTIVITY_RESUMED ||
+                    currentEvent.getEventType() == UsageEvents.Event.ACTIVITY_PAUSED) {
+                //  allEvents.add(currentEvent);
+                String key = currentEvent.getPackageName();
+                System.out.println("Here! 3 "+ String.valueOf(key));
+            }
+        }
+
+        System.out.println("Here! 1 ");
         List<UsageStats> appList = usm.queryUsageStats(UsageStatsManager.INTERVAL_DAILY,
-                System.currentTimeMillis() - 1000 * 3600 * 1, System.currentTimeMillis());
+                System.currentTimeMillis() - 1000 * 3600, System.currentTimeMillis());
+        System.out.println("Here! 2 "+ String.valueOf(appList.size()));
         appList = appList.stream().filter(app -> app.getTotalTimeInForeground() > 0).collect(Collectors.toList());
 
         // Group the usageStats by application and sort them by total time in foreground
+
         if (appList.size() > 0) {
+            System.out.println("Here! 3");
             WritableArray app_list = new WritableNativeArray();
             for (UsageStats usageStats : appList) {
                 try {
@@ -96,7 +119,7 @@ public class UsageStat extends ReactContextBaseJavaModule {
                     WritableMap info = new WritableNativeMap();
 
                     PackageManager pm = context.getPackageManager();
-                    ApplicationInfo ai = pm.getApplicationInfo(usageStats.getPackageName(),0);
+                    ApplicationInfo ai = pm.getApplicationInfo(usageStats.getPackageName(), 0);
 
                     String[] packageNames = usageStats.getPackageName().split("\\.");
                     String appName = packageNames[packageNames.length - 1].trim();
@@ -106,7 +129,7 @@ public class UsageStat extends ReactContextBaseJavaModule {
                     info.putString("first_timestamp", String.valueOf(usageStats.getFirstTimeStamp()));
                     info.putString("last_timestamp", String.valueOf(usageStats.getLastTimeStamp()));
 
-                    if((ai.flags & ApplicationInfo.FLAG_IS_GAME) == ApplicationInfo.FLAG_IS_GAME){
+                    if ((ai.flags & ApplicationInfo.FLAG_IS_GAME) == ApplicationInfo.FLAG_IS_GAME) {
                         info.putString("is_game", String.valueOf(true));
                     }
 

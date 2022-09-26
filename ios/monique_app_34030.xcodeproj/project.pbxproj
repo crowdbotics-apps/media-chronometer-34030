@@ -43,6 +43,7 @@
 		9D567802F45BC70914064E06 /* Pods-monique_app_34030.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-monique_app_34030.release.xcconfig"; path = "Target Support Files/Pods-monique_app_34030/Pods-monique_app_34030.release.xcconfig"; sourceTree = "<group>"; };
 		A96FDB7E0B6DD1E29388696C /* Pods-monique_app_34030-monique_app_34030Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-monique_app_34030-monique_app_34030Tests.debug.xcconfig"; path = "Target Support Files/Pods-monique_app_34030-monique_app_34030Tests/Pods-monique_app_34030-monique_app_34030Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		ADCF39E7DCD20C23DD0406CC /* libPods-monique_app_34030.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-monique_app_34030.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CB20EF7928D8DD4B005D16B3 /* monique_app_34030Release.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = monique_app_34030Release.entitlements; path = monique_app_34030/monique_app_34030Release.entitlements; sourceTree = "<group>"; };
 		CB233764285CA55400215CF6 /* monique_app_34030.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = monique_app_34030.entitlements; path = monique_app_34030/monique_app_34030.entitlements; sourceTree = "<group>"; };
 		CB3E9D45285DBE2C008D2E48 /* monique_app_34030-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "monique_app_34030-Bridging-Header.h"; sourceTree = "<group>"; };
 		CB3E9D46285DBE2D008D2E48 /* RNUsage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RNUsage.swift; sourceTree = "<group>"; };
@@ -92,6 +93,7 @@
 		13B07FAE1A68108700A75B9A /* monique_app_34030 */ = {
 			isa = PBXGroup;
 			children = (
+				CB20EF7928D8DD4B005D16B3 /* monique_app_34030Release.entitlements */,
 				CB233764285CA55400215CF6 /* monique_app_34030.entitlements */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -494,7 +496,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = monique_app_34030/monique_app_34030.entitlements;
+				CODE_SIGN_ENTITLEMENTS = monique_app_34030/monique_app_34030Release.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
